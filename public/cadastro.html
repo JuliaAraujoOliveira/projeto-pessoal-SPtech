@@ -60,6 +60,11 @@
               <option selected>Selecione uma empresa</option>
             </select>
           </div> -->
+
+          <div class="campo">
+            <span>Foto:</span>
+            <input id="foto_input" type="file" placeholder="Seu nome" />
+          </div>
           <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
@@ -108,6 +113,7 @@
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
+    var fotoVar = foto_input.files[0]
     var nomeVar = nome_input.value;
     var usernameVar = username_input.value;
     var emailVar = email_input.value;
@@ -115,13 +121,12 @@
     var senhaVar = senha_input.value;
     // var empresaVar = listaEmpresas.value
     if (
+      fotoVar == "" ||
       nomeVar == "" ||
       usernameVar == "" ||
       emailVar == "" ||
       telefoneVar == ""||
       senhaVar == "" 
-      // confirmacaoSenhaVar == "" 
-      // empresaVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -133,22 +138,26 @@
       setInterval(sumirMensagem, 5000);
     }
 
+    const formData = new FormData();
+
+
+    // formData.append('foto', foto_input.files[0])
+    formData.append('nomeServer', nomeVar)
+    formData.append('usernameServer', usernameVar)
+    formData.append('emailServer', emailVar)
+    formData.append('telefoneServer', telefoneVar)
+    formData.append('senhaServer', senhaVar)
+
+    
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+      // headers: {
+      //   "Content-Type": "application/formData",
+      // },
+      body: formData
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        usernameServer: usernameVar,
-        emailServer: emailVar,
-        telefoneServer: telefoneVar,
-        senhaServer: senhaVar
-        
-      }),
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);

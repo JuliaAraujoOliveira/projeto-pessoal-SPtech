@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Inter:wght@100..900&family=League+Spartan:wght@100..900&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+:root {
+  --tamanho-header: 80px;
+  --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+  --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+  --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+  --tamanho-footer: 65px;
+}
+
+.inicial{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../assets/imgs/fundo-inicial.svg);
+    background-size: cover;
+    background-position: left;
+
+    position: absolute;
+}
+
+.inicial button{
+    background-color: #9EB09D;
+    font-family: 'League Spartan', sans-serif;
+    color: #FFFFFF;
+    width: 30%;
+    height: 50px;
+    border-color: #9EB09D;
+    border-radius: 25px;
+    font-size: 100%;
+    margin-top: 10px;
+    text-decoration: none;
+ 
+}
+.inicial button a {
+    text-decoration: none; /* Remover decoração de texto */
+    color: inherit; /* Herdar a cor do texto do botão */
+}
+.container {
+  display: flex;
+  width: 80%;
+  margin: auto;
+}
+
+.header {
+    position: fixed;
+    top: 2%;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Garante que o header fique acima do conteúdo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--tamanho-header);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    padding: 0 20px; /* Adiciona espaçamento interno */
+}
+
+.header ul{
+    list-style: none;
+}
+
+.header .container {
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.header a {
+  text-decoration: none;
+  color: #152623;
+}
+
+.agora {
+  font-weight: 800;
+}
+
+.imagem {
+    align-items: center; /* Centralizar verticalmente */
+    height: 500vh; /* Definir a altura da imagem para ocupar toda a altura da tela */
+    width: 40dvw;
+    display: flex;
+    flex-direction: column; 
+    margin-top: 8%;
+}
+
+img {
+    width: 60vw;
+    height: 50vh;
+    justify-content: center;
+    align-self:center;
+   
+
+}
+
+#slogan {
+    font-family: 'Cinzel Decorative', sans-serif;
+    font-size: 100%;
+    margin-left: 8dvw;
+    width: 100%;
+    margin-top: -5%;
+   
+}
+
+
+#oque-e{
+    position: relative; /* Torna a posição relativa ao elemento pai */
+    top: 100vh; /* Move a div para baixo de uma altura igual à altura da tela */
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+#lateral {
+    display: flex;
+    position: absolute; /* Define o posicionamento absoluto */
+    top: 0; /* Alinha a div #lateral no topo da div #oque-e */
+    left: 0; /* Alinha a div #lateral à esquerda da div #oque-e */
+    background-color: #9EB09D;
+    width: 50%; /* Largura da div #lateral */
+    height: 100%; /* Altura da div #lateral, igual à altura da div #oque-e */
+    z-index: 1; /* Define a ordem de empilhamento, colocando a div #lateral sobre a div #oque-e */
+}
+
+#lateral img{
+    width: 60vw;
+    height: 50vh;
+    justify-content: center;
+    align-self:center;
+   
+}
+
+#autora{
+    position: relative; /* Torna a posição relativa ao elemento pai */
+    top: 100vh; /* Move a div para baixo de uma altura igual à altura da tela */
+    flex-direction: column;
+    background-color: aliceblue;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+#onu-livros{
+    position: relative; /* Torna a posição relativa ao elemento pai */
+    top: 100vh; /* Move a div para baixo de uma altura igual à altura da tela */
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding: 3px;
+}
+
+.slide-content{
+    margin: 0 40px
+}
+
+.card{
+    width: 320px;
+    border-radius: 25px;
+    background-color: #9EB09D;
+}
+
+.image-content, .card-content{
+    display: flex;
+    padding:10px 14px;
+    flex-direction: center;
+}
+
+.image-content{
+    position: relative;
+    row-gap: 5px;
+   
+}
+
+.overlay::before, 
+.overlay::after{
+    content:'';
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+    height: 40px;
+    width: 40px;
+    background-color: red;
+}
+
+.ouverlay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #152623;
+    border-radius: 25px 25px 0 25px;
+}
+.card-image{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius:50% ;
+    padding: 3px;
+}
+
+.card-image .card-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius:50% ;
+
+}
+
+.name{
+    font-size: 18px;
+    font-weight: 5000;
+    color :black;
+}
+
+.desc{
+    font-size: 14px;
+    color:gray;
+    text-align: center;
+}
+.button{
+    border-color: none;
+    font-size: 16px;
+    color:#FFFFFF;
+    padding: 8px 16px;
+    background-color: blue;
+    border-radius: 6px;
+    margin: 14px;
+    transition: all 0.3s ease;
+}
+
+.button:hover{
+    background-color:  fuchsia;
+}
