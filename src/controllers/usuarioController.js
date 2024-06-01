@@ -19,14 +19,14 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar)
-                                    res.json({
-                                        id: resultadoAutenticar[0].idCadastro,
-                                        email: resultadoAutenticar[0].email,
-                                        nome: resultadoAutenticar[0].nome,
-                                        senha: resultadoAutenticar[0].senhaServer,
-                                    });
-                                
-                            
+                        res.json({
+                            id: resultadoAutenticar[0].idCadastro,
+                            email: resultadoAutenticar[0].email,
+                            nome: resultadoAutenticar[0].nome,
+                            senha: resultadoAutenticar[0].senhaServer,
+                        });
+
+
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -45,35 +45,27 @@ function autenticar(req, res) {
 }
 
 function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-     var nome = req.body.nomeServer;
-     var username = req.body.usernameServer;
-     var email = req.body.emailServer;
-     var telefone = req.body.telefoneServer;
-     var senha = req.body.senhaServer;
+    // Verifica se o arquivo foi enviado corretamente
+    if (!req.file || !req.file.foto) {
+        return res.status(400).send("Foto não enviada!");
+    }
 
+    // Se chegou até aqui, significa que o arquivo foi enviado
+    const imagem = req.file.foto;
+    const { nome, username, email, telefone, senha } = req.body;
 
-    console.log(req.body)
-    //var cadastroId = req.body.cadastroServer;
+    const usuario = { imagem, nome, username, email, telefone, senha };
 
     // Faça as validações dos valores
-    if (nome == undefined) {
-        res.status(400).send("Seu nome está undefined!");
-    } else if (username == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    }else if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    }else if (telefone == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
-   }  //  else if (empresaId == undefined) {                                                                                                                          
+    if (!imagem || !nome || !username || !email || !telefone || !senha) {
+        return res.status(400).send("Todos os campos são obrigatórios!");
+    }  //  else if (empresaId == undefined) {                                                                                                                          
     //     res.status(400).send("Sua empresa está undefined!");
     // }
-     else {
+    else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-         usuarioModel.cadastrar(nome,username,email,telefone,senha)
+        usuarioModel.cadastrar(usuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
