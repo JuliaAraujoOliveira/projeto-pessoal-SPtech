@@ -1,7 +1,9 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+// var aquarioModel = require("../models/aquarioModel");
 
 function autenticar(req, res) {
+
+    
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
@@ -20,7 +22,7 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar)
                         res.json({
-                            id: resultadoAutenticar[0].idCadastro,
+                            // id: resultadoAutenticar[0].idCadastro,
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
                             senha: resultadoAutenticar[0].senhaServer,
@@ -52,7 +54,7 @@ function cadastrar(req, res) {
     // Se chegou até aqui, significa que o arquivo foi enviado
     const foto = req.file.filename;
     const { nome, username, email, telefone, senha } = req.body;
-    const usuario = {  nome, username, email, telefone, senha,foto };
+    const usuario = {nome, username, email, telefone, senha,foto };
     console.log(usuario)
     console.log(foto)
 
