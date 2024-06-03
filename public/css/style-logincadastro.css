@@ -38,6 +38,15 @@ body{
 
 }
 
+
+label{
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+#tamanho{
+  height: 80%;
+}
+
 .form{
   width: 100%;
   max-width: 800px; /* Defina um tamanho máximo para o formulário */
@@ -107,7 +116,8 @@ background-color: #105F64;
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 1rem; /* Adiciona um espaçamento entre os grupos de inputs */
+  height: 60px;
+ /* Adiciona um espaçamento entre os grupos de inputs */
 }
 
 /* .input-goup{
@@ -124,7 +134,8 @@ background-color: #105F64;
 
 }
 .input-box{
-  width: 48%; /* Define uma largura para cada input-box para que fiquem lado a lado */
+  height:40px;
+  width: 80%; /* Define uma largura para cada input-box para que fiquem lado a lado */
 }
 
 
@@ -134,6 +145,7 @@ background-color: #105F64;
   border: none;
   border-radius: 10px;
   box-shadow: 1px 1px 6px #0000001c;
+ 
 }
 
 /* .input-box input{
@@ -197,7 +209,7 @@ padding: 0 0 .5rem;
 .botao button{
   width: 100%;
   max-width: 400px; /* Defina um tamanho máximo para o botão cadastrar */
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: none;
   background-color:#105F64;
   padding: 0.62rem;

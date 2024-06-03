@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./css/style-logincadastro.css" />
   <link rel="icon" href="./assets/icon/ico-svg.svg" />
 </head>
+
 <body>
 
   <div class="container">
@@ -22,68 +23,82 @@
     </div>
 
     <div class="form">
-      <form action="#">
+      <div action="#">
         <div class="formheader">
-          <div class="title"><h1>Cadastre-se</h1></div>
+          <div class="title">
+            <h1>Cadastre-se</h1>
+          </div>
           <div class="logintbutton">
             <button><a href="login.html">Entrar</a></button>
           </div>
         </div>
-       
-        
-        <div class="input-goup">
-          <div class="input-box">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" placeholder=" Ex: Julia Araujo" required>
-          </div>
-        </div>
-
-      
-        <div class="input-goup">
-          <div class="input-box">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder=" Ex:@julinha" required>
-          </div>
-        </div>
-
-        <div class="input-goup">
-          <div class="input-box">
-            <label for="telefone">Telefone</label>
-            <input type="tel" id="telefone" name="telefone" placeholder=" Ex: (11) 94118-5028" required>
-          </div>
-        </div>
-
-        <div class="input-goup">
-          <div class="input-box">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder=" Ex:julia@outlook.com" required>
-          </div>
-        </div>
-
-        <div class="input-goup">
-          <div class="input-box">
-            <label for="Senha">Senha</label>
-            <input type="password" id="senha" name="senha"  placeholder="Digite sua senha" required>
-          </div>
-        </div>
-        
-        <div class="input-goup">
-          <div class="input-box">
-            <label for="confirmSenha">Confirmação de Senha</label>
-            <input type="password" id="confirmSenha" name="confirmSenha"  placeholder="Confirme sua senha"  required>
-          </div>
-        </div>
 
 
-        <div class="botao">
-          <button onclick="cadastrar()">Cadastrar</button>
+        <div id="tamanho">
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="foto">Nome</label>
+              <input type="file" id="foto" name="foto" required>
+            </div>
+          </div>
+
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder=" Ex: Julia Araujo" required>
+            </div>
+          </div>
+
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" placeholder=" Ex:@julinha" required>
+            </div>
+          </div>
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" name="telefone" placeholder=" Ex: (11) 94118-5028" required>
+            </div>
+          </div>
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder=" Ex:julia@outlook.com" required>
+            </div>
+          </div>
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="Senha">Senha</label>
+              <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div>
+          </div>
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="confirmSenha" style="margin-bottom: 5px;">Confirmação de Senha</label>
+              <input type="password" id="confirmSenha" name="confirmSenha" placeholder="Confirme sua senha" required>
+            </div>
+          </div>
+
+
+          <div class="botao">
+            <button onclick="cadastrar()">Cadastrar</button>
+          </div>
         </div>
-      </form>
     </div>
   </div>
 
-     
-       
+ 
+  </div>
+
+
+
 
 
 
@@ -93,20 +108,13 @@
 
 <script>
   function cadastrar() {
-    aguardar();
+    // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
 
 
-    const formData = new FormData();
-    formData.append('foto', foto.files[0])
-    formData.append('nome', nome.value)
-    formData.append('username', username.value)
-    formData.append('email', email.value)
-    formData.append('telefone', telefone.value)
-    formData.append('senha', senha.value)
-
+   
 
 
     // var empresaVar = listaEmpresas.value
@@ -128,26 +136,21 @@
     //   setInterval(sumirMensagem, 5000);
     // }
 
+    const formData = new FormData();
+    formData.append('foto', foto.files[0])
+    formData.append('nome', nome.value)
+    formData.append('username', username.value)
+    formData.append('email', email.value)
+    formData.append('telefone', telefone.value)
+    formData.append('senha', senha.value)
 
-
-
-    // formData.append('foto', formu)
-    // formData.append('nomeServer', nomeVar)
-    // formData.append('usernameServer', usernameVar)
-    // formData.append('emailServer', emailVar)
-    // formData.append('telefoneServer', telefoneVar)
-    // formData.append('senhaServer', senhaVar)
+    console.log(senha.value)
 
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/formData",
-      },
       body: formData
-      // crie um atributo que recebe o valor recuperado aqui
-      // Agora vá para o arquivo routes/usuario.js
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
@@ -163,34 +166,20 @@
           }, "2000");
 
           limparFormulario();
-          finalizarAguardar();
+          // finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        // finalizarAguardar();
       });
 
     return false;
   }
 
-  //   function listar() {
-  //     fetch("/empresas/listar", {
-  //       method: "GET",
-  //     })
-  //       .then(function (resposta) {
-  //         resposta.json().then((empresas) => {
-  //           empresas.forEach((empresa) => {
-  //             listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-  //           });
-  //         });
-  //       })
-  //       .catch(function (resposta) {
-  //         console.log(`#ERRO: ${resposta}`);
-  //       });
-  //   }
+
 
   function sumirMensagem() {
     cardErro.style.display = "none";

@@ -45,23 +45,21 @@ function autenticar(req, res) {
 }
 
 function cadastrar(req, res) {
-    // Verifica se o arquivo foi enviado corretamente
-    if (!req.file || !req.file.foto) {
-        return res.status(400).send("Foto não enviada!");
-    }
+    console.log(req.body)
+    console.log(req.file)
+
 
     // Se chegou até aqui, significa que o arquivo foi enviado
-    const imagem = req.file.foto;
+    const foto = req.file.filename;
     const { nome, username, email, telefone, senha } = req.body;
-
-    const usuario = { imagem, nome, username, email, telefone, senha };
+    const usuario = {  nome, username, email, telefone, senha,foto };
+    console.log(usuario)
+    console.log(foto)
 
     // Faça as validações dos valores
-    if (!imagem || !nome || !username || !email || !telefone || !senha) {
+    if (!foto || !nome || !username || !email || !telefone || !senha) {
         return res.status(400).send("Todos os campos são obrigatórios!");
-    }  //  else if (empresaId == undefined) {                                                                                                                          
-    //     res.status(400).send("Sua empresa está undefined!");
-    // }
+    } 
     else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js

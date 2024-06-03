@@ -1,4 +1,4 @@
-var mysql = require("mysql2");
+    var mysql = require("mysql2");
 
 // CONEXÃO DO BANCO MYSQL SERVER
 var mySqlConfig = {
