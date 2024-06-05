@@ -5,25 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-    <title>Document</title>
+    <title>Home | Newvison</title>
 </head>
 
 <body>
     <nav id="menulateral">
 
         <div id="sidebar">
-            <ul id="itens">
+                <img src="../public/assets/imgs/logo.svg" alt="">
+            <ul id="itens" style="display: flex; flex-direction: column; flex-wrap: wrap;">
+                
                 <li class="itensmenu active">
-                    <a href="#">
-                        <i class="fa-solid fa-house"
-                            style="color: #000000;  margin-left: 2rem; margin-right: 2rem;">Home</i>
-                        <div id="linha-vertical"></div>
+                    <a href="home.html">
+                        <span class="material-symbols-outlined">Home</span>
+                        <p>Home</p>
                     </a>
                 </li>
-                <li class="itensmenu "><a href="#">
-                        <i class="fa-solid fa-gear"
-                            style="color: #000000;  margin-left: 2rem; margin-right: 2rem;">Configurações</i>
+                <li class="itensmenu "><a href="perfil.html">
+                    <span class="material-symbols-outlined">person </span>
+                    <p>Perfil</p>
+                    </a></li>
+
+                    <li class="itensmenu "><a href="configuracoes.html">
+                        <span class="material-symbols-outlined">settings</span>
+                        <p>Configurações</p>
+                    </a></li>
+
+                    <li class="itensmenu "><a href="dash.html">
+                        <span class="material-symbols-outlined">bar_chart_4_bars</span>
+                        <p>Dashboard</p>
                     </a></li>
             </ul>
         </div>
@@ -43,7 +55,8 @@
                     </div>
                     <div class="desc" style=" height: 60%;">Descrição</div>
                     <div class="comentarios" style=" width: 10% ; height: 20%; display: flex;cursor: pointer; ">
-                        Comentários</div>
+                        <i class="fa-regular fa-comment">Comentários</i>
+                    </div>
                 </div>
             </div>
         </div>
