@@ -127,15 +127,14 @@
       telefoneVar == "" ||
       senhaVar == ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+      // cardErro.style.display = "block";
+            alert("Mensagem de erro para todos os campos em branco");
 
       //   finalizarAguardar();
       return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
-    }
+    // } else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
 
     const formData = new FormData();
     formData.append('foto', foto.files[0])
@@ -158,7 +157,7 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+          // cardErro.style.display = "block";
 
           alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")
           // mensagem_erro.innerHTML =
@@ -186,7 +185,8 @@
 
 
 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
-// </script>
+  // function sumirMensagem() {
+  //   cardErro.style.display = "none";
+  // }
+}
+ </script>
