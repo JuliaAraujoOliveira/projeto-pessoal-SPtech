@@ -110,8 +110,12 @@
     margin-bottom: 25vh;
     
   }
+
+
   
   .itensmenu {
+    flex-direction: row;
+    width: 100%;
     padding: 14px;
     cursor: pointer;
     border-radius: 8px;
@@ -126,8 +130,9 @@
 .publica {
     margin-top: 5rem;
     background-color: #E9F4E3;
-    width: 50vw;
-    height: 30vh;
+    width: 40vw;
+    border-radius: 15px;
+    height: 40vh;
     display: flex; /* Allow child elements to align horizontally */
   }
   
@@ -149,6 +154,8 @@
     margin-left: 10px;  /* Add spacing between image and text */
     font-weight: bold;  /* Optional: Emphasize name */
   }
+
+  
 
   .desc-publi {
 
@@ -178,6 +185,15 @@
 }
 
 
+
+#modal{
+  width: 400px;
+  height: 300px;
+  background-color: #81B29A;
+  border-radius: 5px;
+  padding: 20px;
+  
+}
 
 
 

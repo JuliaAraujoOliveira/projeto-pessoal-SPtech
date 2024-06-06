@@ -132,7 +132,7 @@
 
       //   finalizarAguardar();
       return false;
-    // } else {
+    } //else {
     //   setInterval(sumirMensagem, 5000);
     // }
 
@@ -145,9 +145,6 @@
     formData.append('senha', senha.value)
 
     console.log(senha.value)
-
-
-    
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -183,10 +180,4 @@
     return false;
   }
 
-
-
-  // function sumirMensagem() {
-  //   cardErro.style.display = "none";
-  // }
-}
  </script>
