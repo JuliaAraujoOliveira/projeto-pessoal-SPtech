@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
 }
 
 .label-captura {
@@ -115,18 +116,18 @@ body {
   background-color: #212124;
 }
 
-.dash {
+/* .dash {
   width: 80%;
   position: relative;
   top: 0;
   left: 20%;
-  background-color: #161618;
+  background-color: #FFFF;
   height: 100vh;
   overflow: auto;
-}
-
+} */
+/* 
 .area-parametros-alerta {
-  /* border: 2px solid pink; */
+   border: 2px solid pink; 
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -184,16 +185,18 @@ body {
 
 .ideal {
   background-color: #9ccc65;
-}
+} */
 
 .cards {
+  background-color: #FFFFFF;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  height: 450px;
+  height: 100vh;
   width: 100%;
   align-items: center;
   color: white;
+  overflow: auto;
 }
 
 .card-aquario {
@@ -329,6 +332,7 @@ canvas {
 
 .janela {
   display: flex;
+  background-color: #FFFFFF;
   /* width: 100vw; */
 }
 
@@ -348,8 +352,8 @@ canvas {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border-right: 3px solid #32b9cd;
-  background-color: #212124;
+  border-right: 3px solid #D2DDDC;
+  background-color: #D2DDDC;
 }
 
 .dash-right {
@@ -375,7 +379,7 @@ canvas {
 }
 
 .hello h3 {
-  color: #e3b062;
+  color: #161618;
   font-weight: 300;
   font-size: 1.2rem;
 }
@@ -387,7 +391,7 @@ canvas {
 .btn-nav {
   width: 40%;
   color: white;
-  background-color: #e6005a;
+  background-color: #9EB09D;
   border-radius: 5px;
   text-align: center;
   padding: 2% 5%;
@@ -395,15 +399,15 @@ canvas {
 
 .btn-nav-white {
   width: 40%;
-  background-color: white;
-  border: 3px solid #e6005a;
+  background-color: #D2DDDC;
+  border: 3px solid #81B29A;
   border-radius: 5px;
   text-align: center;
   padding: 2% 5%;
 }
 
 .btn-nav-white h3 {
-  color: #e6005a;
+  color: #385142;
   padding: 0;
   margin: 0;
 }
@@ -425,4 +429,76 @@ canvas {
   padding: 10px 15px;
   margin-bottom: 100px;
   cursor: pointer;
+}
+
+
+.publica {
+  margin-left: 15vw;
+  background-color: #385142;
+  width: 50vw;
+  border-radius: 15px;
+  height: 40vh;
+  margin-top: 2rem;
+  margin-top: 1rem;
+  justify-content: center;
+  display: flex; /* Allow child elements to align horizontally */
+}
+
+.info-autora {
+  
+  width: auto;  /* Adjust width as needed based on image and text lengths */
+  height: 20%;  /* Adjust height as needed */
+  display: flex;
+  align-items: center;  }
+
+.info-autora img {
+  width: 100%; /* Adjust width as needed */
+  height: 100%; /* Adjust height as needed */
+  border-radius: 30px;
+  position: relative;
+}
+
+.info-autora span {
+  margin-left: 10px;  /* Add spacing between image and text */
+  font-weight: bold;  /* Optional: Emphasize name */
+}
+
+
+
+.desc-publi {
+
+  width: 95%;
+  height: 80%;
+  display: flex;
+  margin-right: 5rem;
+  margin-top: 35px; /* Add margin between author info and description */
+}
+
+#metrica{
+  width: 100%; 
+  height: 30%;
+ margin-top: 2rem; 
+ display: flex; 
+ flex-direction: row; 
+ justify-content: center;
+}
+
+.card-metrica{
+width: 22%; 
+height: 70%; 
+display: flex; 
+margin-top: 2rem; 
+margin-left: 1rem;
+/* background-color: ;o */
+}
+
+
+
+#modal{
+width: 400px;
+height: 300px;
+background-color: #81B29A;
+border-radius: 5px;
+padding: 20px;
+
 }

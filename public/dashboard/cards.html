@@ -2,15 +2,16 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/imgs/ico-logo.svg" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Tempo Real</title>
+    <title>Newvison | Home</title>
 
 
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
+   
 
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
@@ -20,33 +21,35 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica() ">
 
     <div class="janela">
 
         <div class="header-left dash-header">
 
-            <h1>AquaTech</h1>
+            <img src="../assets/imgs/logo.svg" style="width:20vw;">
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
             <div class="btn-nav">
-                <h3>Aquários</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
+                <h3>Home</h3>
             </div>
 
             <div class="btn-nav-white">
                 <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+                    <h3>Perfil</h3>
                 </a>
             </div>
+
+            <div class="btn-nav-white">
+                <a href="./dashboard.html">
+                    <h3>Config</h3>
+                </a>
+            </div>
+
+            
 
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
@@ -54,7 +57,7 @@
 
         </div>
 
-        <div class="dash">
+        <!-- <div class="dash">
             <div id="alerta">
             </div>
             <div class="area-parametros-alerta">
@@ -83,9 +86,46 @@
                         <p>&gt;=23°C</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="cards" id="cardAquarios">
+                <div id="public" >
+                    <div class="publica">
+                        <div class="info-autora">
+                            <img src="../assets/foto-autora.jpeg" alt="Julia Araujo"> <span style="color: #385142;" >@JuliaAraujo</span>
+                        </div>
+            
+                        <div class="desc-publi">
+                            <div class="conteudo"
+                                style=" width: 100%; height: 100%;display: flex; flex-direction: column;">
+                                <div class="titulo" style=" height: 30%; text-align: center;">aa
+                                </div>
+                                <div class="desc" style=" height: 60%;">Descrição</div>
+                                <div class="comentarios" style=" width: 10% ; height: 20%; display: flex;cursor: pointer; ">
+                                    <i class="fa-regular fa-comment">Comentários</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="public" >
+                        <div class="publica">
+                            <div class="info-autora">
+                                <img src="../assets/foto-autora.jpeg" alt="Julia Araujo"> <span style="color: #385142;" >@JuliaAraujo</span>
+                            </div>
+                
+                            <div class="desc-publi">
+                                <div class="conteudo"
+                                    style=" width: 100%; height: 100%;display: flex; flex-direction: column;">
+                                    <div class="titulo" style=" height: 30%; text-align: center;">aa
+                                    </div>
+                                    <div class="desc" style=" height: 60%;">Descrição</div>
+                                    <div class="comentarios" style=" width: 10% ; height: 20%; display: flex;cursor: pointer; ">
+                                        <i class="fa-regular fa-comment">Comentários</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
             </div>
 
