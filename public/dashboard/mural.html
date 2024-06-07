@@ -118,10 +118,12 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
+        console.log(idUsuario)
 
         var corpo = {
             titulo: form_postagem.titulo.value,
             descricao: form_postagem.descricao.value
+          
         }
 
         fetch(`/avisos/publicar/${idUsuario}`, {
@@ -129,7 +131,7 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(corpo)
+            body: JSON.stringify(corpo, idUsuario)
         }).then(function (resposta) {
 
             console.log("resposta: ", resposta);
@@ -137,8 +139,8 @@
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
                 window.location = "/dashboard/mural.html";
-                limparFormulario();
-                finalizarAguardar();
+                // limparFormulario();
+                // finalizarAguardar();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -146,7 +148,7 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+            // finalizarAguardar();
         });
 
         return false;
@@ -246,14 +248,14 @@
                         feed.appendChild(divPublicacao);
                     }
 
-                    finalizarAguardar();
+                    // finalizarAguardar();
                 });
             } else {
                 throw ('Houve um erro na API!');
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            finalizarAguardar();
+            // finalizarAguardar();
         });
     }
 
