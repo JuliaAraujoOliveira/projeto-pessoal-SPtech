@@ -6,11 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newvison | Configurações</title>
+    <title>Newvison | Dashboard</title>
 
-    
+
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
+
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -31,7 +32,7 @@
 <body>
 
     <div class="janela">
-       
+
         <div class="header-left dash-header">
 
             <img src="../assets/imgs/logo.svg" style="width:20vw;">
@@ -46,15 +47,22 @@
                 </a>
             </div>
 
-            <div class="btn-nav,/ >">
+            <div class="btn-nav">
                 <a href="./mural.html">
                     <h3>Perfil</h3>
                 </a>
             </div>
 
+            <div class="btn-nav">
+                <a href="./config.html">
+                    <h3>Config</h3>
+                </a>
+            </div>
+
+
             <div class="btn-nav-white">
                 <a href="./dashboard.html">
-                    <h3>Config</h3>
+                    <h3>Dash</h3>
                 </a>
             </div>
             <div class="btn-logout" onclick="limparSessao()">
@@ -73,7 +81,30 @@
             <div id="graficos">
             </div>
         </div>
+
+        <div id="config-dash" style="width: 90vw; height: 100vh; display: flex; flex-direction: column;">
+            <div id="metrica">
+                <div class="card-metrica">Total de usuarios cadastrados</div>
+                <div class="card-metrica">contas deletadas</div>
+                <div class="card-metrica">usuario com mais comentario</div>
+                <div class="card-metrica">a</div>
+            </div>
+        </div>
+
+
+      
+
+        <!-- <div class="conteudo" style="width: 100%; height: 70%; display: flex; margin-top: 1rem; justify-content: space-around; align-items: center;">
+            <div id="usuario-ativo" style="background-color: blue; width: 30%; height: 90%; display: flex;  "></div>
+
+        <div class="grafico" style="background-color: antiquewhite; width: 50%; height: 70%;"></div>
+        </div> -->
+
+        
     </div>
+
+
+
 
 
 </body>

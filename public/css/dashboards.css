@@ -6,7 +6,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
+  background-color: #FFFFFF;
+
 }
 
 .label-captura {
@@ -441,26 +442,34 @@ canvas {
   margin-top: 2rem;
   margin-top: 1rem;
   justify-content: center;
-  display: flex; /* Allow child elements to align horizontally */
+  display: flex;
+  /* Allow child elements to align horizontally */
 }
 
 .info-autora {
-  
-  width: auto;  /* Adjust width as needed based on image and text lengths */
-  height: 20%;  /* Adjust height as needed */
+
+  width: auto;
+  /* Adjust width as needed based on image and text lengths */
+  height: 20%;
+  /* Adjust height as needed */
   display: flex;
-  align-items: center;  }
+  align-items: center;
+}
 
 .info-autora img {
-  width: 100%; /* Adjust width as needed */
-  height: 100%; /* Adjust height as needed */
+  width: 100%;
+  /* Adjust width as needed */
+  height: 100%;
+  /* Adjust height as needed */
   border-radius: 30px;
   position: relative;
 }
 
 .info-autora span {
-  margin-left: 10px;  /* Add spacing between image and text */
-  font-weight: bold;  /* Optional: Emphasize name */
+  margin-left: 10px;
+  /* Add spacing between image and text */
+  font-weight: bold;
+  /* Optional: Emphasize name */
 }
 
 
@@ -471,34 +480,56 @@ canvas {
   height: 80%;
   display: flex;
   margin-right: 5rem;
-  margin-top: 35px; /* Add margin between author info and description */
+  margin-top: 35px;
+  /* Add margin between author info and description */
 }
 
-#metrica{
-  width: 100%; 
+#metrica {
+  width: 100%;
   height: 30%;
- margin-top: 2rem; 
- display: flex; 
- flex-direction: row; 
- justify-content: center;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.card-metrica{
-width: 22%; 
-height: 70%; 
-display: flex; 
-margin-top: 2rem; 
-margin-left: 1rem;
-/* background-color: ;o */
+.card-metrica {
+  width: 22%;
+  height: 70%;
+  display: flex;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  /* background-color: ;o */
 }
 
 
 
-#modal{
-width: 400px;
-height: 300px;
-background-color: #81B29A;
-border-radius: 5px;
-padding: 20px;
+#modal {
+  width: 400px;
+  height: 300px;
+  background-color: #81B29A;
+  border-radius: 5px;
+  padding: 20px;
 
+}
+
+
+#metrica {
+  width: 100%;
+  height: 30%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 15vw;
+}
+
+.card-metrica {
+  width: 20%;
+  height: 50%;
+  display: flex;
+  margin-top: 2rem;
+  margin-left: 0.5rem;
+  background-color: #9EB09D;
+  border-radius: 10px;
 }
