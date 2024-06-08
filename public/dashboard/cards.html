@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
-   
+
 
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
@@ -21,7 +21,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica() ">
+<body onload="validarSessao(),atualizarFeed()">
 
     <div class="janela">
 
@@ -54,87 +54,29 @@
                 </a>
             </div>
 
-            
+
 
             <div class="btn-logout" onclick="limparSessao()">
+                <a href="../index.html"></a>
                 <h3>Sair</h3>
             </div>
 
         </div>
 
-        <!-- <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
-                    </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
+
+        <div class="cards" id="cardAquarios">
+            <div class="div-results">
+                <div id="feed_container" class="feed-container" style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
                 </div>
-            </div> -->
-
-            <div class="cards" id="cardAquarios">
-                <div id="public" >
-                    <div class="publica">
-                        <div class="info-autora">
-                            <img src="../assets/foto-autora.jpeg" alt="Julia Araujo"> <span style="color: #385142;" >@JuliaAraujo</span>
-                        </div>
-            
-                        <div class="desc-publi">
-                            <div class="conteudo"
-                                style=" width: 100%; height: 100%;display: flex; flex-direction: column;">
-                                <div class="titulo" style=" height: 30%; text-align: center;">aa
-                                </div>
-                                <div class="desc" style=" height: 60%;">Descrição</div>
-                                <div class="comentarios" style=" width: 10% ; height: 20%; display: flex;cursor: pointer; ">
-                                    <i class="fa-regular fa-comment">Comentários</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="public" >
-                        <div class="publica">
-                            <div class="info-autora">
-                                <img src="../assets/foto-autora.jpeg" alt="Julia Araujo"> <span style="color: #385142;" >@JuliaAraujo</span>
-                            </div>
-                
-                            <div class="desc-publi">
-                                <div class="conteudo"
-                                    style=" width: 100%; height: 100%;display: flex; flex-direction: column;">
-                                    <div class="titulo" style=" height: 30%; text-align: center;">aa
-                                    </div>
-                                    <div class="desc" style=" height: 60%;">Descrição</div>
-                                    <div class="comentarios" style=" width: 10% ; height: 20%; display: flex;cursor: pointer; ">
-                                        <i class="fa-regular fa-comment">Comentários</i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
             </div>
 
         </div>
+
+
+
+
+
+    </div>
 
     </div>
 
@@ -142,21 +84,107 @@
 
 <script>
 
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
+    // function exibirAquarios() {
+
+
+
+
+
+    //     JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
+    //         document.getElementById("cardAquarios").innerHTML += `
+    //                 <div class="card-aquario">
+    //                     <div class="title-aquario">
+    //                         <h1>${item.descricao}</h1>
+    //                     </div>
+    //                     <div class="desc-aquario">
+    //                     <div class="temperatura">
+    //                         <p id="temp_aquario_${item.id}">-°C</p>
+    //                     </div>
+    //                     <div class="cor-alerta" id="card_${item.id}"></div>
+    //                 </div>
+    //                 </div>
+    //                 `
+    //     });
+    // }
+
+
+
+    function atualizarFeed() {
+        fetch("/avisos/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var spanID = document.createElement("span");
+                        var spanTitulo = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var divDescricao = document.createElement("div");
+                        var divButtons = document.createElement("div");
+                        var btnEditar = document.createElement("button");
+                        var btnDeletar = document.createElement("button");
+
+
+
+
+                        feed_container.innerHTML += ` 
+                        <div class="publica">
+                            <div class="info-autora"><img src="../assets/foto-autora.jpeg" alt="Julia Araujo"> <span>@JuliaAraujo</span></div>
+                                <div class="desc-publi">
+                                    <div class="conteudo">
+                                        <div class="titulo" id="titulo">${publicacao.titulo} </div>
+                                            <div class="desc">${publicacao.descPublicacao}</div>
+                                            <div class="comentarios">
+                                                 <i class="fa-regular fa-comment">Comentários</i>
+                                                </div>
+                                </div>
+                            </div>
+                         </div>`
+
+                        // spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
+                        // spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        // spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                        // divDescricao.innerHTML = "Descrição: <b>" + publicacao.descPublicacao + "</b>";
+
+
+                        // divPublicacao.className = "publicacao";
+                        // spanTitulo.id = "inputNumero" + publicacao.idAviso;
+                        // spanNome.className = "publicacao-nome";
+                        // spanTitulo.className = "publicacao-titulo";
+                        // divDescricao.className = "publicacao-descricao";
+
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(divDescricao);
+                        feed.appendChild(divPublicacao);
+                    }
+
+                    // finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            // finalizarAguardar();
         });
     }
 
