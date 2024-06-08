@@ -542,27 +542,27 @@ canvas {
 
 
 .cards {
-  /* Styles for the cards container */
+
 }
 
 #cardAquarios {
-  /* Styles specific to the cardAquarios element */
+
 }
 
 .publica {
-  /* Styles for the publica element */
+
 }
 
 .info-autora {
-  /* Styles for the info-autora element */
+
 }
 
 .desc-publi {
-  /* Styles for the desc-publi element */
+
 }
 
 .conteudo {
-  /* Styles for the conteudo element */
+
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -570,24 +570,28 @@ canvas {
 }
 
 .titulo {
-  /* Styles for the titulo element */
+
   height: 30%;
   text-align: center;
+  margin-top: 1rem;
+  font-size: 20px;
+ 
 }
 
 .desc {
-  /* Styles for the desc element */
+ 
   height: 60%;
 }
 
 .comentarios {
-  /* Styles for the comentarios element */
+
   width: 10%;
   height: 20%;
   display: flex;
   cursor: pointer;
 }
 
-#titulo {  /* Assuming you want specific styling for title with ID */
-  /* Specific styles for the titulo element with ID */
+#titulo {  
+  color: #D2E6C7;
+
 }

@@ -77,7 +77,7 @@
                 <div id="alerta">
                 </div>
                 <div class="container">
-                    <h1>Publicar um aviso</h1>
+                    <h1>Publicar um Post</h1>
                     <div class="div-form">
                         <form id="form_postagem" method="post" onsubmit="return publicar()">
                             <label>
@@ -88,9 +88,9 @@
                             <br>
                             <br>
                             <label>
-                                Descrição (máximo de 250 caracteres):
+                                Descrição (máximo de 900 caracteres):
                                 <br>
-                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                                <textarea name="descricao" id="textarea_descricao" maxlength="800" rows="5"></textarea>
                             </label>
                             <br>
                             <br>
@@ -220,6 +220,23 @@
                         var divButtons = document.createElement("div");
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
+
+
+                        // feed_container.innerHTML += ` 
+                        // <div class="publica">
+                        //     <div class="info-autora"><img src="../assets/foto-autora.jpeg" alt="Julia Araujo"> <span>@JuliaAraujo</span></div>
+                        //         <div class="desc-publi">
+                        //             <div class="conteudo">
+                        //                 <div class="titulo" id="titulo">${publicacao.titulo} </div>
+                        //                     <div class="desc">${publicacao.descPublicacao}</div>
+                        //                     <div class="comentarios">
+                        //                          <i class="fa-regular fa-comment">Comentários</i>
+                        //                         </div>
+
+                                               
+                        //         </div>
+                        //     </div>
+                        //  </div>`
 
 
                         
