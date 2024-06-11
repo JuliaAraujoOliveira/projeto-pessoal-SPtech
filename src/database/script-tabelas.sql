@@ -13,27 +13,38 @@ CREATE TABLE tbCadastro(
 	idCadastro INT PRIMARY KEY AUTO_INCREMENT 
     ,nome VARCHAR(100)
     ,username VARCHAR (20)
+    ,cpf VARCHAR(11)
     ,email VARCHAR(256)
     ,telefone CHAR(15)
     ,senha CHAR(8)
     ,foto VARCHAR(800)
-    ,bio VARCHAR(100)
 );
 
 CREATE TABLE tbPublicacao (
 	idPublicacao INT PRIMARY KEY  AUTO_INCREMENT  
-    ,titulo VARCHAR(40)
+    ,titulo VARCHAR(100)
     ,descPublicacao VARCHAR (300)
-    ,imagem VARCHAR(800)
 );
 
-CREATE TABLE tbComentario (
-	idComentario INT 
-    ,descComentario VARCHAR(100)
-    ,dtComentario DATE
+CREATE TABLE tbCurtida (
+	idCurtida INT auto_increment
+    ,curtida INT
+    ,dtCurtida datetime  timestamp 
     ,fkPublicacao INT
     ,fkCadastro INT
     ,FOREIGN KEY(fkPublicacao) REFERENCES tbPublicacao(idPublicacao)
     ,FOREIGN KEY(fkCadastro) REFERENCES tbCadastro(idCadastro)
-    ,PRIMARY KEY (idComentario,fkPublicacao,fkCadastro)
-)
+    ,PRIMARY KEY (idCurtida,fkPublicacao,fkCadastro)
+);
+
+-- DROP DATABASE newVision;
+
+SELECT * FROM tbCadastro;
+
+SELECT COUNT(idCurtida) FROM tbCurtida;
+
+
+SELECT COUNT(idPublicacao) FROM tbPublicacao;
+
+
+
