@@ -117,28 +117,50 @@
             na newVision você irá conhecer a pessoa que ama a trilogia de Duna e como todo esse universo pode ser explorado. </i> </p>
         </div>
     </div>
-
     <div id="onu-livros">
-        <div class="slide-container">
-            <div class="slide-content">
-                <div class="card-wrapper">
-                    <div class="card">
-                        <div class="image-content">
-                            <span class="ouverlay"></span>
-                            <div class="card-image">
-                                <img src="assets/imgs/onu.svg" alt="" class="card-img">
-                            </div>
+        <div class="carousel-container">
+            <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+            <div class="carousel">
+                <div class="carousel-card">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="assets/download.jpg" alt="Duna Logo" style="width:auto; height: auto;" class="card-img">
                         </div>
-                        <div class="card-content">
-                            <h2 class="name"></h2>
-                            <p class="desc">Lorem ipsum dolor si amet, consectetur adipiscing elit. Integer cursus sit
-                                amet sapien at molestie. Fusce cursus sit amet sapien at </p>
-                            <button class="button">Ver mais</button>
+                        <div class="card-text">
+                            <p>Duna:O livro indica, numa leitura atenta, que o tempo de Paul Atreides está situado em
+                                 cerca de 24.600 anos após o presente, no qual a Terra não é mais habitada e muito da sua história já
+                                 foi esquecida, enquanto algumas tradições históricas e religiosas se mantêm.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="assets/imgs/onu.svg" alt="ONU Logo"  class="card-img">
+                        </div>
+                        <div class="card-text">
+                            <p>ONU:Organização das Nações Unidas, uma organização 
+                            intergovernamental que reúne 193 países e dois Estados observadores não-membros. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="assets/download.png" alt="ODS 15 Logo" style="width:auto; height: auto;" class="card-img">
+                        </div>
+                        <div class="card-text">
+                            <p>ODS 15 preservação da vida terrestre: Usar sustentavelmente os recursos naturais em cadeias 
+                                produtivas e em atividades de subsistência de comunidades, e integrá-los em políticas públicas é 
+                                tarefa central para o 
+                                atingimento destas metas e a promoção de todos os outros ODS</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
         </div>
+    </div>
     </div>
 
     <script src="js/script.js"></script>
@@ -149,60 +171,94 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const sections = document.querySelectorAll('div[id]');
-        const navLinks = document.querySelectorAll('.header a');
+    
+ document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('div[id]');
+    const navLinks = document.querySelectorAll('.header a');
 
-        function updateActiveLink() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 60 && pageYOffset < sectionTop + sectionHeight - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('selected');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('selected');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveLink);
-        updateActiveLink();  // Run on page load
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.forEach(link => link.classList.remove('selected'));
-                link.classList.add('selected');
-            });
-        });
-    });
-    function toggleText(button) {
-        const container = button.parentElement;
-        const textToToggle = container.querySelector('.texto-expansivel');
-        const isExpanded = container.classList.contains('expanded');
-
-        // Fechar todos os textos expandidos
-        document.querySelectorAll('.texto-expansivel').forEach(texto => {
-            const btn = texto.parentElement.querySelector('.expande-btn');
-            if (texto !== textToToggle) {
-                texto.parentElement.classList.remove('expanded');
-                btn.classList.remove('expande-btn-clicked');
+    function updateActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop - 60 && pageYOffset < sectionTop + sectionHeight - 60) {
+                current = section.getAttribute('id');
             }
         });
 
-        // Adicionar ou remover a classe apenas do botão clicado
-        if (isExpanded) {
-            container.classList.remove('expanded');
-            button.classList.remove('expande-btn-clicked');
-        } else {
-            container.classList.add('expanded');
-            button.classList.add('expande-btn-clicked');
-        }
+        navLinks.forEach(link => {
+            link.classList.remove('selected');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('selected');
+            }
+        });
     }
 
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();  // Run on page load
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.forEach(link => link.classList.remove('selected'));
+            link.classList.add('selected');
+        });
+    });
+});
+function toggleText(button) {
+    const container = button.parentElement;
+    const textToToggle = container.querySelector('.texto-expansivel');
+    const isExpanded = container.classList.contains('expanded');
+
+    // Fechar todos os textos expandidos
+    document.querySelectorAll('.texto-expansivel').forEach(texto => {
+        const btn = texto.parentElement.querySelector('.expande-btn');
+        if (texto !== textToToggle) {
+            texto.parentElement.classList.remove('expanded');
+            btn.classList.remove('expande-btn-clicked');
+        }
+    });
+
+    if (isExpanded) {
+        container.classList.remove('expanded');
+        button.classList.remove('expande-btn-clicked');
+    } else {
+        container.classList.add('expanded');
+        button.classList.add('expande-btn-clicked');
+    }
+}
+let currentIndex = 1; 
+function showSlide(index) {
+  const slides = Array.from(document.querySelectorAll('.carousel-card'));
+    const totalSlides = slides.length;
+    console.log(slides);
+  if (index >= totalSlides) {
+    currentIndex = 0;
+  } else if (index < 0) {
+    currentIndex = totalSlides - 1;
+  } else {
+    currentIndex = index;
+  }
+
+  slides.forEach((slide, idx) => {
+    if (idx === currentIndex) {
+      slide.classList.add('active');
+    } else {
+      slide.classList.remove('active');
+    }
+  });
+
+  const offset = (currentIndex - 1) * -33.3333;
+  document.querySelector('.carousel').style.transform = `translateX(${offset}%)`;
+}
+
+function nextSlide() {
+  showSlide(currentIndex + 1);
+}
+
+function prevSlide() {
+  showSlide(currentIndex - 1);
+}
+
+showSlide(currentIndex);
+    </script>
 </script>
