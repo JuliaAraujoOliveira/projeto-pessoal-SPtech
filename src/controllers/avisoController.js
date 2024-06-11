@@ -126,6 +126,11 @@ function deletar(req, res) {
         );
 }
 
+
+function like() {
+    
+}
+
 module.exports = {
     listar,
     listarPorUsuario,

@@ -5,16 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>New Vision</title>
-
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="./assets/icon/ico-svg.ico">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
 <body>
-
     <div class="inicial">
         <div class="header">
             <ul class="container">
@@ -35,49 +32,177 @@
                 </li>
             </ul>
         </div>
-
         <div class="imagem">
             <img src="assets/imgs/logo.svg" alt="Logo">
             <div id="slogan"><span>Uma nova forma de discutir o futuro.</span></div>
-            <button><a href="#oque-e">Saiba Mais</a></button>
+            <button onclick="window.location.href='#oque-e'">Saiba Mais</button>
         </div>
     </div>
-
 
     <div id="oque-e">
         <div id="lateral">
             <img src="assets/imgs/logo.svg" alt="Logo">
         </div>
+        <div class="conteudo">
+            <div class="botoes-laterais">
+                <div class="expande-container">
+                    <button class="expande-btn" onclick="toggleText(this)">
+                        Por que foi criado?
+                    </button>
+                    <div class="barra"></div>
+                    <div class="texto-expansivel hidden" id="por-que-foi-criado">
+                        <p > <span>
+                                <h2> <i>Apaixonado por Duna e pela preservação do planeta? Então a newVision é o seu
+                                        lugar!</i></h2>
+                            </span>
+                            <span style="font-size: 20px;">Descubra:</span><br>
 
+                        <p style="display: flex; justify-content: center; font-size: 18px; ">
+                        <ul style="list-style: none;">
+                            <li>Análises profundas da trilogia Duna: personagens e simbolismos da obra-prima de Frank
+                                Herbert como nunca
+                                antes</li><br>
+                            <li> Conexões surpreendentes com a ODS 15: Desvende como Duna e a
+                                sustentabilidade se entrelaçam de forma inesperada.</li><br>
+                            <li> Um blog pessoal envolvente: Mergulhe nas reflexões da autora sobre
+                                literatura, meio ambiente e muito mais.</li>
+                        </ul>
+                        </p>
+
+                        </p>
+                    </div>
+                </div>
+                <div class="expande-container">
+                    <button class="expande-btn" onclick="toggleText(this)">
+                        Prepare-se para:
+                    </button>
+                    <div class="barra"></div>
+                    <div class="texto-expansivel hidden" id="como-funciona" style="color:  #152623;">
+                        <p style="display: flex; justify-content: center; font-size: 18px;">
+                            <span style="display: flex; justify-content: center; font-size: 18px; ">
+                                <h2> <i>Expandir seus horizontes:</i></h2>
+                            </span>
+
+                                 <p>
+                                    <ul style="list-style: none;">
+                                         <li>Desfrute de uma experiência literária enriquecedora e reflexiva.
+                                          Conscientizar-se sobre a importância da sustentabilidade: Inspire-se para agir em prol
+                                          do nosso planeta.
+                                        </li><br>
+                                         <li> Encontrar uma comunidade apaixonada: Conecte-se com outros fãs de Duna e defensores do meio ambiente.</li><br>
+                                        <li> Acesse a newVision e embarque em uma jornada inesquecível!</li><br>
+                                     </ul>
+
+                                 </p>
+                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+
     <div id="autora">
-        bbb
+        <div class="profile-picture">
+            <img src="./assets/foto-autora.jpeg" alt="Foto da Autora">
+        </div>
+        <div class="text-container">
+            <p><h3 style="color: #284943;">Olá Tudo bem?</h3><br>
+              <i style="font-size: 20px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #152623;"> Eu sou a Julia, uma pessoa apaixonada por livros e series que envolvam ciencia e tecnologia.<br>
+                Os livros sempre estiveram na minha vida desde pequena, sempre possui o habito de leitura, contudo foi na minha adolescencia que eu descobri a trilogia
+            escrita por Frank Herbet na decada de 1960, que ai sim eu realmente me apaixonei por livros de mesmo genero e me tornei uma leitora ativa.
+                Estudante de Tecnologia sempre fui apaixonada pela area e tudo o que a envolve desde um simples circuito até a implementação da tecnologia na saúde (principalmente na neurologia ☺).
+                Contudo a Julia não se resume apenas a livros e tecnologias é uma pessoa que busca sempre estar alienada não somente com o que aacontece no Brasil mas tambem no fundo a fora.
+                Por alguns amigos sou conhecida como um poço de curiosidades aleatotorio sobre coisas que as pessoas nunca pararam para pensar ou por que de usarmos tal coisa ou falarmos certas palavras, aqui 
+            na newVision você irá conhecer a pessoa que ama a trilogia de Duna e como todo esse universo pode ser explorado. </i> </p>
+        </div>
     </div>
 
     <div id="onu-livros">
         <div class="slide-container">
-          <div class="slide-content">
-            <div class="card-wrapper">
-              <div class="card">
-                <div class="image-content">
-                  <span class="ouverlay"> </span>
-
-                    <div class="card-image">
-                      <img src="assets/imgs/onu.svg" alt="" class="card-img" >
+            <div class="slide-content">
+                <div class="card-wrapper">
+                    <div class="card">
+                        <div class="image-content">
+                            <span class="ouverlay"></span>
+                            <div class="card-image">
+                                <img src="assets/imgs/onu.svg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name"></h2>
+                            <p class="desc">Lorem ipsum dolor si amet, consectetur adipiscing elit. Integer cursus sit
+                                amet sapien at molestie. Fusce cursus sit amet sapien at </p>
+                            <button class="button">Ver mais</button>
+                        </div>
                     </div>
                 </div>
-                <div class="card-content">
-                  <h2 class="name"></h2>
-                  <p class="desc">Lorem ipsum dolor si amet, consectetur adipiscing elit. Integer cursus sit amet sapien at molestie. Fusce cursus sit amet sapien at </p>
-                  <button class="button">Ver mais</button>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
     </div>
 
+    <script src="js/script.js"></script>
 </body>
 
 </html>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('div[id]');
+        const navLinks = document.querySelectorAll('.header a');
+
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 60 && pageYOffset < sectionTop + sectionHeight - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('selected');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('selected');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();  // Run on page load
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.forEach(link => link.classList.remove('selected'));
+                link.classList.add('selected');
+            });
+        });
+    });
+    function toggleText(button) {
+        const container = button.parentElement;
+        const textToToggle = container.querySelector('.texto-expansivel');
+        const isExpanded = container.classList.contains('expanded');
+
+        // Fechar todos os textos expandidos
+        document.querySelectorAll('.texto-expansivel').forEach(texto => {
+            const btn = texto.parentElement.querySelector('.expande-btn');
+            if (texto !== textToToggle) {
+                texto.parentElement.classList.remove('expanded');
+                btn.classList.remove('expande-btn-clicked');
+            }
+        });
+
+        // Adicionar ou remover a classe apenas do botão clicado
+        if (isExpanded) {
+            container.classList.remove('expanded');
+            button.classList.remove('expande-btn-clicked');
+        } else {
+            container.classList.add('expanded');
+            button.classList.add('expande-btn-clicked');
+        }
+    }
+
+</script>
