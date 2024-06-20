@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Newvision</title>
+    <script src="../js/sessao.js"></script>
+</head>
+<body>
+
+    <div class="header-left dash-header">
+
+        <img src="../assets/logo.svg" style="width:20vw;">
+
+        <div class="hello">
+            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+        </div>
+
+        <div class="btn-nav-white">
+            <h3>Home</h3>
+        </div>
+
+        <div class="btn-nav">
+            <a href="./mural.html">
+                <h3>Perfil</h3>
+            </a>
+        </div>
+
+        </div>
+
+
+
+        <div class="btn-logout" onclick="limparSessao()">
+            <a href="../index.html"> <h3>Sair</h3></a>
+           
+        </div>
+
+    </div>
+
+    
+   <script>
+     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+   </script>
+</body>
+</html>

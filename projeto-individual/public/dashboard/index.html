@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Newvision</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="header-left dash-header">
+
+        <img src="../assets/logo.svg" style="width:20vw;">
+
+        <div class="hello">
+            <h3>Olá, <span id="b_usuario">Julia Araujo </span>!</h3>
+        </div>
+
+        <div class="btn-nav-white">
+            <a href="index.html">
+                <h3>Home</h3>
+            </a>
+           
+        </div>
+
+        <div class="btn-nav">
+            <a href="./mural.html">
+                <h3>Perfil</h3>
+            </a>
+        </div>
+
+
+        <div class="btn-nav">
+            <a href="./dashboard.html">
+                <h3>Dash</h3>
+            </a>
+        </div>
+        
+        <div class="btn-logout" onclick="limparSessao()">
+            <a href="../index.html"> <h3>Sair</h3></a>
+           
+        </div>
+
+    </div>
+
+    <div class="dash">
+        <div id="alerta">
+        </div>
+
+        <div class="btns-dash" id="btnAquario">
+            <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+        </div>
+        <div id="graficos">
+        </div>
+    </div>
+
+    <div id="config-dash" style="width: 90vw; height: 100vh; display: flex; flex-direction: column;">
+        <div id="metrica">
+            <div class="card-metrica">
+                <span style="display: flex; justify-content: center; flex-direction: row;">otal de usuarios cadastrados</span>
+               <h2 id="qtdcadastro" style="margin-top: 2rem;"></h2>
+            </div>
+           
+            <div class="card-metrica">usuario com mais comentario</div>
+            <div class="card-metrica">total de posts
+                <h2 id="qtdpost"  style="margin-top: 2rem;" ></h2>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

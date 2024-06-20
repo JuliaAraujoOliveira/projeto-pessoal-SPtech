@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>newVision | Login</title>
+
+    <script src="js/login.js"></script>
+    <!-- 
+    <link rel="stylesheet" href="css/estilo.css"> -->
+    <link rel="stylesheet" href="./css/style-logincadastro.css">
+    <link rel="icon" href="./assets/icon/ico-svg.svg">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+
+
+
+
+
+    <div class="login">
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card card-login">
+                <div class="formulario">
+                    <div class="container">
+                        <div class="formimage">
+                            <img src="assets/logo.svg" alt="">
+                        </div>
+
+                        <div class="form">
+                            <form action="#">
+                                <div class="formheader">
+                                    <div class="title">
+                                        <h1>Seja Bem vindo de volta</h1>
+                                    </div>
+                                </div>
+
+
+                                <div class="input-goup">
+                                    <div class="input-box">
+                                        <label for="email">Email</label>
+                                        <input type="text" id="email_input" name="email_input"
+                                            placeholder=" Ex: julia@gmail.com" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="input-goup">
+                                    <div class="input-box">
+                                        <label for="username">Senha</label>
+                                        <input type="password" id="senha_input" name="senha_input"
+                                            placeholder=" Digite sua Senha" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="botao">
+                                    <button type="submit" onclick="login()">Entrar</button>
+                                </div>
+
+                                <div class="naoconta" style="margin-top: 1rem;">
+                                    <span>Não tem conta?
+                                      <a href="cadastro.html" style="text-decoration: none;">cadastre-se</a> aqui
+                                    </span>
+                                  </div>
+
+                                <div id="div_erros_login"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+</body>
+
+</html>
