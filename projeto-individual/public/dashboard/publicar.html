@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/imgs/ico-logo.svg" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newvison | Publicar</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./../css/estilo.css" />
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+    <script src="../js/publicacoes.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body onload=" atualizarFeed()" style="background-color: #161618;">
+
+    <div class="janela" >
+
+
+       
+        <div class="header-left dash-header">
+
+            <img src="../assets/logo.svg" style="width:20vw;">
+
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav">
+                <a href="index.html">
+                    <h3>Home</h3>
+                </a>
+               
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./mural.html">
+                    <h3>Perfil</h3>
+                </a>
+            </div>
+
+
+            <div class="btn-nav">
+                <a href="./dashboard.html">
+                    <h3>Dash</h3>
+                </a>
+            </div>
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+
+
+        <div class="dash-right" style="background-color: white;">
+            <div class="configs">
+
+            </div>
+
+
+            <div class="avisos">
+                <div id="alerta">
+                </div>
+                <div class="container">
+                    <h1>Publicar um Post</h1>
+                    <div class="div-form">
+                        <form id="form_postagem" method="post" onsubmit="return publicar()">
+                            <label>
+                                Título:
+                                <br>
+                                <input name="titulo" id="titulo" maxlength="100" type="text">
+                            </label>
+                            <br>
+                            <br>
+                            <label>
+                                Descrição (máximo de 900 caracteres):
+                                <br>
+                                <textarea name="descricao" id="textarea_descricao" maxlength="800" rows="5"></textarea>
+                            </label>
+                            <br>
+                            <br>
+                            <button>Enviar</button>
+                        </form>
+                    </div>
+                    <h1>Posts</h1>
+                    <div class="div-results">
+                        <div id="feed_container" class="feed-container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
+
+<script>
+      b_usuario.innerHTML = sessionStorage.ID_USUARIO;
+</script>
