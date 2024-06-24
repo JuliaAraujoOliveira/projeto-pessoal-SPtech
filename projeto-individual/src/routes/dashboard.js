@@ -11,8 +11,8 @@ router.get("/metricasusuario" ,function (req,res) {
     dashboardController.metricasusuario(req,res);
 })
 
-router.get("/curtir" , function (req,res) {
-    dashboardController.curtir(req,res);
+router.get("/metricacomentario" , function (req,res) {
+    dashboardController.metricascomentario(req,res);
 })
 
 router.get("/metricaspost" ,function (req,res) {

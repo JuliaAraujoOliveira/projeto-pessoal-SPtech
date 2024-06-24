@@ -52,7 +52,7 @@ function editar(idAviso) {
     sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
     console.log("cliquei em editar - " + idAviso);
     window.alert("Você será redirecionado à página de edição do aviso de id número: " + idAviso);
-    window.location = "/dashboard/edicao-aviso.html"
+    window.location = "edicaopublicar.html"
 
 }
 

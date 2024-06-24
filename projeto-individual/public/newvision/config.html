@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Newvision</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="config.js"></script>
+</head>
+
+<body>
+
+    <div class="janela">
+
+        <div class="header-left dash-header">
+
+            <img src="../assets/logo.svg" style="width:20vw;">
+            <div class="btn-nav">
+                <a href="index.html">
+                    <h3>Home</h3>
+                </a>
+
+            </div>
+
+            <div class="btn-nav">
+                <a href="livros.html">
+                    <h3>Livros Duna</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="config.html">
+                    <h3>Configurações</h3>
+                </a>
+            </div>
+
+
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <a href="../index.html"></a>
+                <h3>Sair</h3>
+            </div>
+        </div>
+
+        <div class="config">
+            <div class="foto">
+                <div class="profile-picture">
+                    <img src="../assets/foto-autora.jpeg" alt="Foto da Autora">
+                </div>
+                <input type="file">
+                <!-- <button>Escolher Foto</button> -->
+
+            </div>
+
+
+            <div class="info">
+                <div class="dados">
+                    <label for="label_nome">Nome: <input type="text" name="" id="nome" disabled> <button >Trocar</button></label>
+                    
+                </div>
+                <div class="dados">
+                    <label for="label_username">User: <input type="text" name="" id="username" disabled> <button >Trocar</button></label>
+                    
+                </div>
+
+                <div class="dados">
+                    <label for="label_email">Email: <input type="email" name="" id="email" disabled><button type="button">Trocar</button></label>
+                  
+                </div>
+                <div class="dados">
+                    <label for="label_senha">Senha: <input type="password" name="" id="senha" disabled><button type="button">Trocar</button></label>
+
+                </div>
+                 <button onsubmit="enviar()" id="enviarinfo">Salvar Informações</button> 
+
+            
+            </div>
+
+        </div>
+    
+
+    </div>
+
+    <script src="config.js"></script>
+</body>
+
+</html>

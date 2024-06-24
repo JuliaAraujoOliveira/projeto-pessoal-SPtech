@@ -393,8 +393,8 @@ img {
 
 
 .profile-picture {
-  width: 350px;
-  height: 350px;
+  width: 550px;
+  height: 550px;
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 20px; /* Adiciona margem abaixo da imagem */
@@ -408,12 +408,12 @@ img {
 }
 
 .text-container {
-  border: 2px solid #9EB09D;
+
   padding: 10px;
-  border-radius: 10px;
-  max-width: 800px;
+  max-width: 1000px;
+  height: 50%;
   text-align: center;
-  background-color: aliceblue;
+  background-color: #D2DDDC;
   margin-left: 10%;
 }
 

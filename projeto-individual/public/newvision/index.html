@@ -1,45 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Newvision</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="../js/sessao.js"></script>
+    <script src="indexusuario.js"></script>
 </head>
+
 <body>
+    <div class="janela">
 
-    <div class="header-left dash-header">
+        <div class="header-left dash-header">
 
-        <img src="../assets/logo.svg" style="width:20vw;">
+            <img src="../assets/logo.svg" style="width:20vw;">
+            <div class="btn-nav-white">
+                <a href="index.html">
+                    <h3>Home</h3>
+                </a>
 
-        <div class="hello">
-            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav">
+                <a href="livros.html">
+                    <h3>Livros Duna</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav">
+                <a href="config.html">
+                    <h3>Configurações</h3>
+                </a>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <a href="../index.html"></a>
+                <h3>Sair</h3>
+            </div>
+
         </div>
 
-        <div class="btn-nav-white">
-            <h3>Home</h3>
+
+        <div class="cards" id="cardAquarios">
+            <div class="div-results">
+                <div id="feed_container" class="feed-container"
+                    style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                </div>
+            </div>
         </div>
-
-        <div class="btn-nav">
-            <a href="./mural.html">
-                <h3>Perfil</h3>
-            </a>
-        </div>
-
-        </div>
-
-
-
-        <div class="btn-logout" onclick="limparSessao()">
-            <a href="../index.html"> <h3>Sair</h3></a>
-           
-        </div>
-
     </div>
 
     
-   <script>
-     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-   </script>
+
 </body>
+
 </html>
+
+<script>
+    function atualizarFeed() {
+        fetch("../src/publicacoes/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var spanID = document.createElement("span");
+                        var spanTitulo = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var divDescricao = document.createElement("div");
+                        var divButtons = document.createElement("div");
+                        var btnEditar = document.createElement("button");
+                        var btnDeletar = document.createElement("button");
+
+
+
+
+                        feed_container.innerHTML += ` 
+                        <div class="publica">
+                            <div class="info-autora"><img src="../assets/foto-autora.jpeg" alt="Julia Araujo"> <span>@JuliaAraujo</span></div>
+                                <div class="desc-publi">
+                                    <div class="conteudo">
+                                        <div class="titulo" id="titulo">${publicacao.titulo} </div>
+                                            <div class="desc">${publicacao.descPublicacao}</div>
+                                            <div class="comentarios">
+                                                <span class="material-symbols-outlined"  id="like" onclick="curtir(this)">favorite</span>
+                                                </div>
+                                </div>
+                            </div>
+                         </div>`
+
+
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(divDescricao);
+                        feed.appendChild(divPublicacao);
+                    }
+
+                    // finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            // finalizarAguardar();
+        });
+    }
+
+
+    function curtir(botao) {
+
+
+        botao.innerHTML = `<span class="material-symbols" style="color: #81B29A" id="like" onclick="descurtir()">favorite</span>`
+        var idUsuario = sessionStorage.ID_USUARIO
+        var publicacao = sessionStorage.FK_PUBLICACAO
+        console.log(publicacao, idUsuario)
+        var corpo = {
+            "idUsuario": idUsuario,
+            "publicacao": publicacao
+
+        }
+
+        fetch(`/medidas/curtir?idUsuario=${idUsuario}&publicacao=${publicacao}`)
+    }
+</script>

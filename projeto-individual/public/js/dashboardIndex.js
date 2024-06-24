@@ -1,6 +1,6 @@
 // contagem de usuarios cadastrados
 function metricas() {
-    fetch("../dashboard/metricasusuario", {
+    fetch("/dashboard/metricasusuario", {
         method: "GET",
     }).then(function (resposta) {
         resposta.json().then((registrados) => {
@@ -14,7 +14,7 @@ function metricas() {
 
 //contagem comentarios
 function metricascomentarios() {
-    fetch("../dashboard/metricascomentario", {
+    fetch("/dashboard/metricascomentario", {
         method: "GET",
     }).then(function (resposta) {
         resposta.json().then((registrados) => {
@@ -30,7 +30,7 @@ function metricascomentarios() {
 
 // contagem de posts
 function metricaspost() {
-    fetch("../dashboard/metricaspost", {
+    fetch("/dashboard/metricaspost", {
         method: "GET",
     }).then(function (resposta) {
         resposta.json().then((registrados) => {
