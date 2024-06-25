@@ -299,6 +299,7 @@ body {
 
 .config{
 
+
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -354,20 +355,12 @@ body {
 
 
 .informacoes {
-  width: 90%;
-  height: 90%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-left: 2%;
-  position: relative; /* New */
+  width: 100%; height: 80%;
 } 
 
 .video{
-  width: 100%;
-  display: flex;
-  margin-top: 0;
-  justify-content: center;
+  width: 100%; display: flex;
+  margin-top: 0; justify-content: center;
   align-items: center;
 } 
 
@@ -413,11 +406,13 @@ body {
   justify-content: space-between;
   align-items: end;
   height: 50%;
+  margin-top: 2rem;
 
 }
 .card {
+  
   width: 280px;
-  height: 280px;
+  height: 380px;
   background: white;
   border-radius: 32px;
   padding: 3px;
@@ -498,8 +493,19 @@ body {
 }
 
 
-.about-me{
-  margin-bottom: 5rem;
+.content{
+  margin-bottom: 6rem;
+}
+
+
+.sobre{
+  color:white;
+  margin-left: 10%;
+}
+
+
+.sobre:hover{
+  color: #152623;
 }
 .card .bottom .bottom-bottom {
   position: absolute;

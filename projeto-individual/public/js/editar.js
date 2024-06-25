@@ -12,6 +12,7 @@ function editar() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
+     
             descricao: textarea_descricao.value
         })
     }).then(function (resposta) {

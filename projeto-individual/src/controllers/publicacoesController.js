@@ -89,6 +89,7 @@ function publicar(req, res) {
 }
 
 function editar(req, res) {
+
     var novaDescricao = req.body.descricao;
     var idAviso = req.params.idAviso;
 
