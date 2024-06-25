@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,14 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="../js/sessao.js"></script>
-    <script src="../js/dashboardIndex.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="../assets/ico-svg.ico" type="image/x-icon">
 
 
 </head>
-<body>
+
+<body onload="metricas() ,metricascomentarios(),metricaspost()" >
 
     <div class="header-left dash-header">
 
@@ -27,7 +29,7 @@
             <a href="index.html">
                 <h3>Home</h3>
             </a>
-           
+
         </div>
 
         <div class="btn-nav">
@@ -37,58 +39,115 @@
         </div>
 
 
-      
-        
+
+
         <div class="btn-logout" onclick="limparSessao()">
-            <a href="../index.html"> <h3>Sair</h3></a>
-           
+            <a href="../index.html">
+                <h3>Sair</h3>
+            </a>
+
         </div>
 
     </div>
 
 
 
-    <div id="config-dash" style="width: 90vw; height: 100vh; display: flex; flex-direction: column; align-items: center; ">
+    <div id="config-dash"
+        style="width: 90vw; height: 100vh; display: flex; flex-direction: column; align-items: center; ">
         <div id="metrica" style="display: flex; justify-content: center; align-items: center; width: 80%;">
             <div class="card-metrica">
-                <span style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Total de usuarios cadastrados</span>
-               <h2 id="qtdcadastro" style="margin-top: 2rem;"></h2>
+                <span
+                    style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Total
+                    de usuarios cadastrados</span>
+                <h2 id="qtdcadastro" style="margin-top: 2rem;"></h2>
             </div>
 
             <div class="card-metrica">
-                <span style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Percentual de usuarios ativos</span>
-               <h2 id="qtdcomentario" style="margin-top: 2rem;"></h2>
+                <span
+                    style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Percentual
+                    de usuarios ativos</span>
+                <h2 id="qtdcomentario" style="margin-top: 2rem;"></h2>
             </div>
 
             <div class="card-metrica">
-                <span style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Total de total de posts</span>
-               <h2 id="qtdpost" style="margin-top: 2rem;"></h2>
+                <span
+                    style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Total
+                    de total de posts</span>
+                <h2 id="qtdpost" style="margin-top: 2rem;"></h2>
             </div>
-           
-           
+
+
         </div>
 
 
-            <div class="graficos" style="display: flex; flex-direction: row; width: 80%; justify-content: space-around; align-items: center; margin-left: 30%;">
-                <div style="width: 50%; height: 100%; display:flex; justify-content: center; background-color: red; ">
-                    <canvas id="myChart"></canvas>
-                </div>
-        
-                <div style=" height: 100%; width: 30%; display: flex; justify-content: center; background-color: blueviolet;">
-                    <canvas id="ranking"></canvas>
-                </div>
+        <div class="graficos"
+            style="display: flex; flex-direction: row; width: 80%; justify-content: space-around; align-items: center; margin-left: 30%;">
+            <div style="width: 50%; height: 100%; display:flex; justify-content: center; background-color: red; ">
+                <canvas id="myChart"></canvas>
             </div>
-       
-        
+
+            <div
+                style=" height: 100%; width: 30%; display: flex; justify-content: center; background-color: blueviolet;">
+                <canvas id="ranking"></canvas>
+            </div>
+        </div>
+
+
     </div>
+
 
 
    
-    
 </body>
+
 </html>
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
- 
+
+    // contagem de usuarios cadastrados
+    function metricas() {
+        fetch("/dashboard/metricas", {
+            method: "GET",
+        }).then(function (resposta) {
+            resposta.json().then((registrados) => {
+                qtdcadastro.innerHTML = registrados[0].qtd;
+            });
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+
+    //contagem comentarios
+    function metricascomentarios() {
+        fetch("/dashboard/metricascomentarios", {
+            method: "GET",
+        }).then(function (resposta) {
+            resposta.json().then((registrados) => {
+                qtdcomentario.innerHTML = registrados[0].qtdcomentario;
+            });
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+
+
+
+    // contagem de posts
+    function metricaspost() {
+        fetch("/dashboard/metricaspost", {
+            method: "GET",
+        }).then(function (resposta) {
+            resposta.json().then((registrados) => {
+                qtdpost.innerHTML = registrados[0].qtdpost;
+            });
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+
+
 </script>
