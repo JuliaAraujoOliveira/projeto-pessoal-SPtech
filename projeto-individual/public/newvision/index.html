@@ -60,13 +60,13 @@
                 <div class="coments"
                     style=" width: 100%; height: 90%; display: flex; justify-content: start; flex-direction: column;">
                     <button class="close-btn" id="close-modal"
-                        style="display: flex; justify-content: start; margin-left: 95%;"><span
+                        style="display: flex; justify-content: start; margin-left: 90%; width: auto;"><span
                             class="material-symbols-outlined">
                             close
                         </span></button>
-                    <div class="outros-comentarios" style="background-color: gray; height: 90%; width: 100%;"></div>
+                    <div class="outros_comentarios" style="background-color: gray; height: 90%; width: 100%;"></div>
                     <div class="comentar" style="display: flex;display:flex; align-items: start; align-items: start;">
-                        <input id="modal-textarea" placeholder="Adicione um comentario..."
+                        <input id="usuarioComentario" placeholder="Adicione um comentario..."
                             style="margin-top: 1.5%;"></input>
                         <button id="save-modal" onclick="comentar()">Publicar</button>
                     </div>
@@ -110,12 +110,11 @@
                                 <div class="conteudo">
                                     <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
                                     <div class="desc">${publicacao.descPublicacao}</div>
-                                </div>
-                            </div>
-                            <div class="comentarios">
-                                
-                                  <button class="modalBtn"><span class="material-symbols-outlined" ">comment</span></button>
-                            </div>
+                                    <div class="comentarios" >                                
+                                        <button class="modalBtn" ><span class="material-symbols-outlined">comment</span></button>
+                                    </div>
+                                </div>                                
+                            </div>                            
                         </div>`;
                     });
 
@@ -169,47 +168,42 @@
     // função para cadastrar comentario.
 
     function comentar() {
-        fetch("/publicacoes/comentar").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status === 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerText = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
-                }
+    var idUsuario = sessionStorage.ID_USUARIO;
+    var idPostagem = sessionStorage.ID_POSTAGEM;
+    console.log(idUsuario)
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    var feed = document.getElementById("feed_container");
-                    feed.innerHTML = "";
-                    resposta.forEach(publicacao => {
-                        feed.innerHTML += `
-                        <div class="publica">
-                            <div class="info-autora">
-                                <img id="foto" src="../assets/foto-autora.jpeg">
-                                <span>@JuliaAraujo</span>
-                            </div>
-                            <div class="desc-publi">
-                                <div class="conteudo">
-                                    <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
-                                    <div class="desc">${publicacao.descPublicacao}</div>
-                                </div>
-                            </div>
-                            <div class="comentarios">
-                                
-                                  <button class="modalBtn"><span class="material-symbols-outlined" ">comment</span></button>
-                            </div>
-                        </div>`;
-                    });
-
-                    addModalEventListeners();  // Adicione event listeners após inserir o HTML
-                });
-            } else {
-                throw 'Houve um erro na API!';
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-        });
+    var corpo = {
+        comentario: usuarioComentario.value,
+        idusuario: idUsuario,
+        postagem: idPostagem
+      
     }
+
+    fetch(`/publicacoes/comentario/${idUsuario}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(corpo, idUsuario)
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            window.alert("Post realizado com sucesso !");
+            window.location = "/newvision/index.html";
+            
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+    });
+
+    return false;
+
+}
 </script>
