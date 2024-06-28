@@ -107,7 +107,7 @@
 
     // contagem de usuarios cadastrados
     function metricas() {
-        fetch("/dashboard/metricas", {
+        fetch("/dashboard/metricasusuario", {
             method: "GET",
         }).then(function (resposta) {
             resposta.json().then((registrados) => {
