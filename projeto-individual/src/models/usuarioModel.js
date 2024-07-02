@@ -22,6 +22,11 @@ function cadastrar(usuario) {
     return database.executar(instrucaoSql);
 }
 
+function configurar(idUsuario) {
+    var instrucaoSql = `SELECT (nome, username, email, telefone senha ) FROM tbCadastro WHERE idCadastro = ${idUsuario}`
+}
+
+
 module.exports = {
     autenticar,
     cadastrar

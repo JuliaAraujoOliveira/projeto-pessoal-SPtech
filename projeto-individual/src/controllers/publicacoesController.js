@@ -88,6 +88,35 @@ function publicar(req, res) {
     }
 }
 
+
+function comentarios(req, res) {
+    var comentario = req.body.comentario;
+    var idUsuario = req.params.idusuario;
+    var idPostagem = req.params.postagem;
+    if (comentario == undefined) {
+        res.status(400).send("O comentario está indefinido!");
+    } else if (idPostagem == undefined) {
+        res.status(400).send(" id da postagem está indefinido!");
+    } else if (idUsuario == undefined) {
+        res.status(403).send("O id do usuário está indefinido!");
+    } else {
+        avisoModel.comentarios(comentario, idPostagem, idUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
 function editar(req, res) {
 
     var novaDescricao = req.body.descricao;
@@ -128,15 +157,14 @@ function deletar(req, res) {
 }
 
 
-function like() {
-    
-}
+
 
 module.exports = {
     listar,
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
+    comentarios,
     editar,
     deletar
 }

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="../js/sessao.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="../assets/ico-svg.ico" type="image/x-icon">
 
@@ -55,25 +54,27 @@
     <div id="config-dash"
         style="width: 90vw; height: 100vh; display: flex; flex-direction: column; align-items: center; ">
         <div id="metrica" style="display: flex; justify-content: center; align-items: center; width: 80%;">
-            <div class="card-metrica">
+            <div class="card-metrica" style="display: flex; flex-direction: column;">
                 <span
-                    style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Total
-                    de usuarios cadastrados</span>
-                <h2 id="qtdcadastro" style="margin-top: 2rem;"></h2>
+                style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;width: auto; font-weight: 500;font-size:25px;">
+                Total de usuarios cadastrados</span>
+                <h2 id="qtdcadastro" style="display: flex; justify-content: center; align-items: center; flex-direction: row; margin-bottom: 50px;"></h2>
             </div>
 
-            <div class="card-metrica">
+            <div class="card-metrica" style="display: flex; flex-direction: column;">
                 <span
-                    style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Percentual
-                    de usuarios ativos</span>
-                <h2 id="qtdcomentario" style="margin-top: 2rem;"></h2>
+                    style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;width: auto; font-weight: 500;font-size: 25px;">
+                    Percentual de usuarios ativos</span>
+                <!-- <h2 id="qtdcomentario" style="display: flex; justify-content: center; align-items: center; flex-direction: row; margin-bottom: 50px;"></h2> -->
+                <h2 id="qtdcomentario" style="display: flex; justify-content: center; align-items: center; flex-direction: row; margin-bottom: 50px;"></h2>
+
             </div>
 
-            <div class="card-metrica">
-                <span
-                    style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;">Total
-                    de total de posts</span>
-                <h2 id="qtdpost" style="margin-top: 2rem;"></h2>
+            <div class="card-metrica" style="display: flex; flex-direction: column;">
+                <span style="display: flex; justify-content: center; flex-direction: row; margin: 5%; width: 100%; height: 30%; font-size: large;width: auto; font-weight: 500;font-size: 25px ;">
+                    Total de total de posts
+                </span>
+                <h2 id="qtdpost" style="display: flex; justify-content: center; align-items: center; flex-direction: row; margin-bottom: 50px;"></h2>
             </div>
 
 
@@ -82,7 +83,7 @@
 
         <div class="graficos"
             style="display: flex; flex-direction: row; width: 80%; justify-content: space-around; align-items: center; margin-left: 30%;">
-            <div style="width: 50%; height: 100%; display:flex; justify-content: center; background-color: red; ">
+            <div  style="width: 50%; height: 100%; display:flex; justify-content: center; background-color: red; ">
                 <canvas id="myChart"></canvas>
             </div>
 
@@ -120,17 +121,17 @@
 
 
     //contagem comentarios
-    function metricascomentarios() {
-        fetch("/dashboard/metricascomentarios", {
-            method: "GET",
-        }).then(function (resposta) {
-            resposta.json().then((registrados) => {
-                qtdcomentario.innerHTML = registrados[0].qtdcomentario;
-            });
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-    }
+     function metricascomentarios() {
+         fetch("/dashboard/metricascomentarios", {
+             method: "GET",
+         }).then(function (resposta) {
+             resposta.json().then((registrados) => {
+                 qtdcomentario.innerHTML = registrados[0].qtdcomentario;
+             });
+         }).catch(function (resposta) {
+             console.log(`#ERRO: ${resposta}`);
+         });
+     }
 
 
 
@@ -148,6 +149,86 @@
         });
     }
 
+
+
+    function obterDadosGrafico() {
+    fetch("/dashboard/topVtubers",).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                plotarGrafico(resposta);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    }).catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+// A função *plotarGrafico* também invoca a função *atualizarGrafico*
+function plotarGrafico(resposta) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Criando estrutura para plotar gráfico - labels
+    let labels = [];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+        labels: labels,
+        datasets: [{
+            label: 'fans',
+            data: [],
+            borderWidth: 1
+        }]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        labels.push(registro.nomeVtuber);
+        dados.datasets[0].data.push(registro.fans);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+        type: 'bar',
+        data: dados,
+        options:{
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Top 3 Vtubers com mais fãs cadastrados',
+                    font: {
+                        size: 20,
+                        weight: 'bold'
+                    }
+                }
+            }
+        }
+    };
+
+    // Adicionando gráfico criado em div na tela
+    let myChart = new Chart(
+        document.getElementById("myChart"),
+        config
+    );
+}
 
 
 </script>

@@ -111,7 +111,7 @@
                                     <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
                                     <div class="desc">${publicacao.descPublicacao}</div>
                                     <div class="comentarios" >                                
-                                        <button class="modalBtn" ><span class="material-symbols-outlined">comment</span></button>
+                                        <button class="modalBtn"  style="cursor:pointer" > <span class="material-symbols-outlined">comment</span></button>
                                     </div>
                                 </div>                                
                             </div>                            
@@ -167,43 +167,44 @@
 
     // função para cadastrar comentario.
 
-    function comentar() {
-    var idUsuario = sessionStorage.ID_USUARIO;
-    var idPostagem = sessionStorage.ID_POSTAGEM;
-    console.log(idUsuario)
+    function comentar(idPostagem) {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var idPostagem = sessionStorage.ID_PUBLICACAO;
+        console.log(idAviso)
+        console.log(idUsuario)
 
-    var corpo = {
-        comentario: usuarioComentario.value,
-        idusuario: idUsuario,
-        postagem: idPostagem
-      
-    }
+        var corpo = {
+            comentario: usuarioComentario.value,
+            idusuario: idUsuario,
+            postagem: idPostagem
 
-    fetch(`/publicacoes/comentario/${idUsuario}`, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(corpo, idUsuario)
-    }).then(function (resposta) {
-
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-            window.alert("Post realizado com sucesso !");
-            window.location = "/newvision/index.html";
-            
-        } else if (resposta.status == 404) {
-            window.alert("Deu 404!");
-        } else {
-            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
         }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        // finalizarAguardar();
-    });
 
-    return false;
+        fetch(`/publicacoes/comentario/${idPostagem}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo, idUsuario, idPostagem)
+        }).then(function (resposta) {
 
-}
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso !");
+                window.location = "/newvision/index.html";
+
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+
+    }
 </script>

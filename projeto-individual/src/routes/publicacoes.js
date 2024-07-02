@@ -29,4 +29,8 @@ router.delete("/deletar/:idAviso", function (req, res) {
     publicacoesController.deletar(req, res);
 });
 
+router.post("/comentario/:idAviso" ,function (req,res){
+    publicacoesController.comentarios(req,res);
+}), 
+
 module.exports = router;

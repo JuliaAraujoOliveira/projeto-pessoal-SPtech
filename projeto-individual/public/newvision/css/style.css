@@ -299,7 +299,7 @@ body {
 .titulo {
   height: 30%;
   text-align: center;
-  margin-top: 1rem;
+
   font-size: 20px;
   margin-left: 1rem;
 }
@@ -315,7 +315,8 @@ body {
   cursor: pointer;
   justify-content: start;
   align-items: end;
-  height: 15px;
+  height: auto;
+  margin-top: 5px;
   
   
 }
@@ -557,41 +558,30 @@ body {
   border-radius: 5px;
   font-size: 1.2rem;
   border: none;
-  width: 95%;
+  width: 100%;
   height: 40px;
   background-color: #E9F4E3;
 }
 
-.dados select {
-  border-radius: 5px;
-  font-size: 1.2rem;
-  border: none;
-  width: 95%;
-  height: 40px;
-  background-color: #E9F4E3;
-}
 
-.dados textarea {
-  border-radius: 5px;
-  font-size: 1.2rem;
-  border: none;
-  width: 95%;
-  background-color: #E9F4E3;
-}
 
 .config button {
   cursor: pointer;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border: 0;
-  border-radius: 5px;
   font-weight: 600;
   font-size: 18px;
   padding: 10px 15px;
-  color: white;
-  background-color: #e6005a;
-  width: 120px;
-  height: fit-content;
+  color: #152623;
+  background-color: white;
+  width: 30%;
+  height: auto;
   margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1px;
+  margin-left: 1px;
 }
 
 .config .profile-btn-editar {
@@ -670,8 +660,12 @@ body {
   background-color:#385142;
   margin-left: 2px;
   color:white;
-  width: 10%;
-  height: 10%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  
+
  
 
 }

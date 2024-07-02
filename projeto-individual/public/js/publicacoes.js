@@ -7,7 +7,7 @@ function limparFormulario() {
 
 // publicando algo
 function publicar() {
-    var idUsuario = sessionStorage.ID_USUARIO;
+    var idUsuario = sessionStorage.EMAIL_USUARIO;
     console.log(idUsuario)
 
     var corpo = {
@@ -29,8 +29,7 @@ function publicar() {
         if (resposta.ok) {
             window.alert("Post realizado com sucesso !");
             window.location = "/dashboard/publicar.html";
-            // limparFormulario();
-            // finalizarAguardar();
+            
         } else if (resposta.status == 404) {
             window.alert("Deu 404!");
         } else {

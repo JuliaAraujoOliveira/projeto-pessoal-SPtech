@@ -42,7 +42,8 @@ function login() {
         if (resposta.ok) {
             resposta.json().then(json => {
                 sessionStorage.NOME_USUARIO = json.nome;
-
+                sessionStorage.ID_USUARIO = json.id
+ 
                 alert("Login realizado com sucesso!")
                 setTimeout(function () {
                     window.location = "newvision/index.html";

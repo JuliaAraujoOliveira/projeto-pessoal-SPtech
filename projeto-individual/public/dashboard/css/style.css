@@ -436,23 +436,6 @@ canvas {
   /* Add margin between author info and description */
 }
 
-#metrica {
-  width: 100%;
-  height: 30%;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.card-metrica {
-  width: 22%;
-  height: 70%;
-  display: flex;
-  margin-top: 2rem;
-  margin-left: 1rem;
-  /* background-color: ;o */
-}
 
 
 
@@ -473,15 +456,15 @@ canvas {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-left: 15vw;
+  margin-left: 25vw;
 }
 
 .card-metrica {
-  width: 20%;
+  width: 30%;
   height: 50%;
   display: flex;
-  margin-top: 2rem;
-  margin-left: 0.5rem;
+  margin-top: 3%;
+  margin-left: 5%;
   background-color: #9EB09D;
   border-radius: 10px;
 }
@@ -523,3 +506,4 @@ canvas {
   color: #D2E6C7;
 
 }
+

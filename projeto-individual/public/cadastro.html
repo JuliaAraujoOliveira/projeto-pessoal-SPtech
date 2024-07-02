@@ -19,7 +19,7 @@
 
   <div class="container">
     <div class="formimage">
-      <img src="assets/imgs/logo.svg" alt="">
+      <img src="assets/logo.svg" alt="">
     </div>
 
     <div class="form">
@@ -154,7 +154,7 @@
 
     console.log(senha.value)
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
+    fetch("/usuario/cadastrar", {
       method: "POST",
       body: formData
     })

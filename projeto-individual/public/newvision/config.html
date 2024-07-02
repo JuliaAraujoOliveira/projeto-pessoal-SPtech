@@ -43,15 +43,16 @@
 
 
             <div class="btn-logout" onclick="limparSessao()">
-                <a href="../index.html"></a>
-                <h3>Sair</h3>
+                <a href="../index.html">
+                <h3>Sair</h3></a>
             </div>
+
         </div>
 
         <div class="config">
             <div class="foto">
                 <div class="profile-picture">
-                    <img src="../assets/foto-autora.jpeg" alt="Foto da Autora">
+                    <img src="../assets/f273dae987f963891863588833acf4561601e968192163b4ce3bc9127711ca826c949df910bf3ffd3ceb2acaf3101071900f8f0f31e9519ad0a53640758ab878.jpg" alt="Foto da Autora">
                 </div>
                 <input type="file">
                 <!-- <button>Escolher Foto</button> -->
@@ -61,23 +62,29 @@
 
             <div class="info">
                 <div class="dados">
-                    <label for="label_nome">Nome: <input type="text" name="" id="nome_input" disabled>
+                    <label for="label_nome" ><span style="margin-right: 5%;">Nome:</span> <input type="text" name="" id="nome_input" disabled>
                         <button>Trocar</button></label>
 
                 </div>
                 <div class="dados">
-                    <label for="label_username">User: <input type="text" name="" id="username" disabled>
+                    <label for="label_username"><span style="margin-right: 1%;">Username:</span>  <input type="text" name="" id="username" disabled>
                         <button>Trocar</button></label>
 
                 </div>
 
                 <div class="dados">
-                    <label for="label_email">Email: <input type="email" name="" id="email" disabled><button
+                    <label for="label_email"><span style="margin-right: 5%;">Email:</span>  <input type="email" name="" id="email" disabled><button
                             type="button">Trocar</button></label>
 
                 </div>
+
                 <div class="dados">
-                    <label for="label_senha">Senha: <input type="password" name="" id="senha" disabled><button
+                    <label for="label_username"><span style="margin-right: 1%;">Telefone:</span>  <input type="text" name="" id="tel" disabled>
+                        <button>Trocar</button></label>
+
+                </div>
+                <div class="dados">
+                    <label for="label_senha"><span style="margin-right: 4%;">Senha:</span>  <input type="password" name="" id="senha" disabled><button
                             type="button">Trocar</button></label>
 
                 </div>
@@ -98,6 +105,10 @@
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     var nomeUsuario = sessionStorage.NOME_USUARIO;
+
+
+    var idUsuario = sessionStorage.ID_USUARIO
+
     const Dado = document.querySelectorAll('.dados');
 
     Dado.forEach(group => {
@@ -111,13 +122,14 @@
 
 
 
-    function selecionar(usuario) {
-        fetch('/usuario/selecionar').then(function (resposta) {
+    function config(idUsuario) {
+
+       
+        fetch('/usuario/configuracoes').then(function (resposta) {
             if (resposta.ok) {
-                console.log('Achei')
-
-                nome_input.innerHTML = `${usuario.nome}`
-
+                console.log('Achei')    
+                var nomeinput  = document.getElementById("nome_input");
+                var  username = document.getElementById("username_input")
 
             } else {
                 throw ('Houve algum erro se vira')
