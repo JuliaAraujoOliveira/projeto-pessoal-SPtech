@@ -88,17 +88,17 @@ function publicar(req, res) {
     }
 }
 
-
 function comentarios(req, res) {
     var comentario = req.body.comentario;
-    var idUsuario = req.params.idusuario;
-    var idPostagem = req.params.postagem;
+    var idUsuario = req.body.idusuario; // Corrigido para usar req.body.idusuario
+    var idPostagem = req.params.idAviso; // Certifique-se de que o nome do parâmetro é idAviso
+
     if (comentario == undefined) {
-        res.status(400).send("O comentario está indefinido!");
+        res.status(400).send("O comentário está indefinido!");
     } else if (idPostagem == undefined) {
-        res.status(400).send(" id da postagem está indefinido!");
+        res.status(400).send("ID da postagem está indefinido!");
     } else if (idUsuario == undefined) {
-        res.status(403).send("O id do usuário está indefinido!");
+        res.status(403).send("O ID do usuário está indefinido!");
     } else {
         avisoModel.comentarios(comentario, idPostagem, idUsuario)
             .then(

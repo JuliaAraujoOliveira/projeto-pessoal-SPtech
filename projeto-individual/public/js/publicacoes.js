@@ -27,7 +27,7 @@ function publicar() {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            window.alert("Post realizado com sucesso !");
+            window.alert("Post realizado com sucesso !" );
             window.location = "/dashboard/publicar.html";
             
         } else if (resposta.status == 404) {

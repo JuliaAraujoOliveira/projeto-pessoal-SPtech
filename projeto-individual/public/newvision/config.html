@@ -127,16 +127,49 @@
        
         fetch('/usuario/configuracoes').then(function (resposta) {
             if (resposta.ok) {
-                console.log('Achei')    
-                var nomeinput  = document.getElementById("nome_input");
-                var  username = document.getElementById("username_input")
+                if (resposta.status === 204) {
+                    var dadosUsuario = document.getElementById("info");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerText = "Nenhum resultado encontrado."
+                    dadosUsuario.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
 
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    var dadosUsuario = document.getElementById("info");
+                    dadosUsuario.innerHTML = "";
+                    resposta.forEach(publicacao => {
+                        console.log(publicacao.idPublicacao);  // Adicione esta linha para verificar o ID da postagem
+                        dadosUsuario.innerHTML += `
+                        <div class="publica">
+                             <div class="info-autora">
+                              <img id="foto" src="../assets/foto-autora.jpeg">
+                                <span>@JuliaAraujo</span>
+                            </div>
+                            <div class="desc-publi">
+                                <div class="conteudo">
+                                    <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
+                                    <div class="desc">${publicacao.descPublicacao}</div>
+                                    <div class="comentarios">
+                                        <button class="modalBtn" onclick="comentar(${publicacao.idPublicacao})" style="cursor:pointer">
+                                            <span class="material-symbols-outlined">comment</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    });
+
+
+                    addModalEventListeners();  // Adicione event listeners após inserir o HTML
+                });
             } else {
-                throw ('Houve algum erro se vira')
+                throw 'Houve um erro na API!';
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            // finalizarAguardar();
         });
 
     }
