@@ -26,25 +26,69 @@ CREATE TABLE tbPublicacao (
     ,descPublicacao VARCHAR (300)
 );
 
-CREATE TABLE tbCurtida (
-	idCurtida INT auto_increment
-    ,curtida INT
-    ,dtCurtida datetime  timestamp 
+CREATE TABLE tbComentario(
+	idComentario INT AUTO_INCREMENT 
+    ,comentario VARCHAR(400)
     ,fkPublicacao INT
     ,fkCadastro INT
     ,FOREIGN KEY(fkPublicacao) REFERENCES tbPublicacao(idPublicacao)
     ,FOREIGN KEY(fkCadastro) REFERENCES tbCadastro(idCadastro)
-    ,PRIMARY KEY (idCurtida,fkPublicacao,fkCadastro)
-);
-
--- DROP DATABASE newVision;
+    ,PRIMARY KEY (idComentario,fkPublicacao,fkCadastro)
+    );
+    
 
 SELECT * FROM tbCadastro;
 
-SELECT COUNT(idCurtida) FROM tbCurtida;
+SELECT * FROM tbPublicacao;
 
 
-SELECT COUNT(idPublicacao) FROM tbPublicacao;
+SELECT * FROM tbComentario;
+
+SELECT * FROM tbPublicacao;
+
+
+-- select para mostrar as postagens no feed inicial do usuario (da ultima publicacao para a primeira)
+ SELECT  a.idPublicacao AS idPublicacao, a.titulo, a.descPublicacao FROM tbPublicacao a  ORDER BY idPublicacao DESC ;
+
+
+-- metricas da dashboard
+
+    -- contar quantidade de posts e usuarios na plataforma:
+    SELECT COUNT(idComentario) FROM tbComentario;
+    SELECT COUNT(idPublicacao) FROM tbPublicacao;
+
+
+-- metrica para gerar o percentual de usuarios ativos com base se o usuario tem ou não comentario:
+
+    -- Contar o total de usuários cadastrados
+    SELECT COUNT(*) AS TotalUsuarios FROM tbCadastro;
+
+-- Contar o número de usuários que possuem comentários
+    SELECT COUNT(DISTINCT fkCadastro) AS UsuariosAtivos FROM tbComentario;
+
+-- Calcular o percentual de usuários ativos
+    SELECT  (SELECT COUNT(DISTINCT fkCadastro) FROM tbComentario) / (SELECT COUNT(*) FROM tbCadastro) * 100 AS PercentualUsuariosAtivos;
+
+
+-- montar o ranking de acordo com a qtd de comentarios que cada usuario tem
+    SELECT tbCadastro.username AS Nomeusuario, tbCadastro.foto AS Imagem, COUNT(tbComentario.idComentario) AS NumeroDeComentarios
+	FROM tbComentario JOIN tbCadastro ON tbComentario.fkCadastro = tbCadastro.idCadastro
+	GROUP BY tbCadastro.username, tbCadastro.foto
+	ORDER BY NumeroDeComentarios DESC LIMIT 3;
+
+
+
+
+-- Select para mostrar o comentario jusnto com a foto e o username que o usuario criador do comentario;
+SELECT comentario AS Comentario, username AS Nomeusuario, foto as Imagem FROM tbComentario as comentario JOIN tbCadastro as usuario ON usuario.idCadastro = comentario.fkCadastro;
+
+
+
+
+
+
+
+
 
 
 

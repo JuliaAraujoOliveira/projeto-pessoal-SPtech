@@ -24,8 +24,15 @@ function metricaspost() {
 
 
 // cadastro curtida 
-function metricascomentario(idUsuario, publicacao) {
-    var instrucaoSql = `INSERT INTO (curtida,dtCurtida,fkPublicacao,fkCadastro) FROM tbCurtida VALUES (1,now(),${publicacao},${idUsuario}) ;`
+function metricasporcentagem() {
+    var instrucaoSql = `
+        SELECT 
+            ROUND((COUNT(DISTINCT tbComentario.fkCadastro) / COUNT(tbCadastro.idCadastro)) * 100, 2) AS PercentualUsuariosAtivos
+        FROM 
+            tbCadastro
+        LEFT JOIN 
+            tbComentario ON tbCadastro.idCadastro = tbComentario.fkCadastro;
+    `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -33,5 +40,5 @@ function metricascomentario(idUsuario, publicacao) {
 module.exports = {
     metricasusuario,
     metricaspost,
-    metricascomentario
+    metricasporcentagem
 }

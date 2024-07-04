@@ -38,7 +38,7 @@ function metricaspost(req,res) {
 }
 
 
-function metricascomentario(req,res) {
+function metricasporcentagem(req,res) {
 
     console.log(`Usuarios`);
 
@@ -46,7 +46,7 @@ function metricascomentario(req,res) {
     var publicacao = req.params.publicacao;
     console.log(req.params)
 
-    dashboardModel.metricascomentario(idusuario,publicacao).then(function (resultado) {
+    dashboardModel.metricasporcentagem(idusuario,publicacao).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -64,6 +64,6 @@ function metricascomentario(req,res) {
 module.exports = {
     metricasusuario,
     metricaspost,
-    metricascomentario
+    metricasporcentagem
 
 }
