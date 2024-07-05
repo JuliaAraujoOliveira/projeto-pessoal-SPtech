@@ -141,9 +141,9 @@ function mostrarcomentarios(req, res) {
 function editar(req, res) {
 
     var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
+    var idPublicacao = req.params.idPublicacao;
 
-    avisoModel.editar(novaDescricao, idAviso)
+    avisoModel.editar(novaDescricao, idPublicacao)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -160,9 +160,10 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    var idpublicacao = req.params.idPublicacao;
+    console.log(idpublicacao)
 
-    avisoModel.deletar(idAviso)
+    avisoModel.deletar(idpublicacao)
         .then(
             function (resultado) {
                 res.json(resultado);

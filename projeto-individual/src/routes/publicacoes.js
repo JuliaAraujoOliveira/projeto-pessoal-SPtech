@@ -21,11 +21,11 @@ router.post("/publicar/:idUsuario", function (req, res) {
     publicacoesController.publicar(req, res);
 });
 
-router.put("/editar/:idAviso", function (req, res) {
+router.put("/editar/:idPublicacao", function (req, res) {
     publicacoesController.editar(req, res);
 });
 
-router.delete("/deletar/:idAviso", function (req, res) {
+router.delete("/deletar/:idPublicacao", function (req, res) {
     publicacoesController.deletar(req, res);
 });
 

@@ -47,19 +47,19 @@ function publicar() {
 
 
 // editando uma publicacao
-function editar(idAviso) {
-    sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
-    console.log("cliquei em editar - " + idAviso);
-    window.alert("Você será redirecionado à página de edição do aviso de id número: " + idAviso);
+function editar(idPublicacao) {
+    sessionStorage.ID_POSTAGEM_EDITANDO = idPublicacao;
+    console.log("cliquei em editar - " + idPublicacao);
+    window.alert("Você será redirecionado à página de edição do aviso de id número: " + idPublicacao);
     window.location = "edicaopublicar.html"
 
 }
 
 
 // deletando uma publicação
-function deletar(idAviso) {
-    console.log("Criar função de apagar post escolhido - ID" + idAviso);
-    fetch(`/publicacoes/deletar/${idAviso}`, {
+function deletar(idPublicacao) {
+    console.log("Criar função de apagar post escolhido - ID" + idPublicacao);
+    fetch(`/publicacoes/deletar/${idPublicacao}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -116,7 +116,7 @@ function atualizarFeed() {
                     btnDeletar.innerHTML = "Deletar";
 
                     divPublicacao.className = "publicacao";
-                    spanTitulo.id = "inputNumero" + publicacao.idAviso;
+                    spanTitulo.id = "inputNumero" + publicacao.idPublicacao;
                     spanNome.className = "publicacao-nome";
                     spanTitulo.className = "publicacao-titulo";
                     divDescricao.className = "publicacao-descricao";
@@ -124,12 +124,12 @@ function atualizarFeed() {
                     divButtons.className = "div-buttons"
 
                     btnEditar.className = "publicacao-btn-editar"
-                    btnEditar.id = "btnEditar" + publicacao.idAviso;
-                    btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
+                    btnEditar.id = "btnEditar" + publicacao.idPublicacao;
+                    btnEditar.setAttribute("onclick", `editar(${publicacao.idPublicacao})`);
 
                     btnDeletar.className = "publicacao-btn-editar"
-                    btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                    btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+                    btnDeletar.id = "btnDeletar" + publicacao.idPublicacao;
+                    btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPublicacao})`);
 
                     divPublicacao.appendChild(spanID);
                     divPublicacao.appendChild(spanNome);
