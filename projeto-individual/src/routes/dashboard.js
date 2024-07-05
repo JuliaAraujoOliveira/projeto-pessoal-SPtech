@@ -20,4 +20,9 @@ router.get("/metricaspost" ,function (req,res) {
 })
 
 
+router.get("/Ranking", function (req,res) {
+    dashboardController.rankingusuarios(req,res)
+})
+
+
 module.exports = router;

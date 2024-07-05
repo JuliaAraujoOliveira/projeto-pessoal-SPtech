@@ -39,9 +39,20 @@ function metricasporcentagem() {
 }
 
 
+function rankingusuarios(){
+    var instrucaoSql = `SELECT usuario.username AS Nomeusuario, usuario.foto AS Imagem, COUNT(comentario.idComentario) AS NumeroDeComentarios
+	FROM tbComentario as comentario JOIN tbCadastro as usuario ON comentario.fkCadastro = usuario.idCadastro
+		GROUP BY usuario.username, usuario.foto
+			ORDER BY NumeroDeComentarios DESC LIMIT 3;;`
+
+            console.log("Executando a instrução SQL: \n" +instrucaoSql);
+            return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
     metricasusuario,
     metricaspost,
-    metricasporcentagem
+    metricasporcentagem,
+    rankingusuarios
 }
