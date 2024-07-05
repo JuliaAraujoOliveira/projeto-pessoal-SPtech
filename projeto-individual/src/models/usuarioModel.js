@@ -11,8 +11,6 @@ function autenticar(email, senha) {
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(usuario) {
-
-
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
@@ -23,11 +21,20 @@ function cadastrar(usuario) {
 }
 
 function configurar(idUsuario) {
-    var instrucaoSql = `SELECT (nome, username, email, telefone senha ) FROM tbCadastro WHERE idCadastro = ${idUsuario}`
+    var instrucaoSql = `SELECT idCadastro, nome, username, email, telefone, senha FROM tbCadastro WHERE idCadastro = ${idUsuario}`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
+function imagem(idUsuario) {
+    var instrucaoSql = `SELECT idCadastro, foto FROM tbCadastro WHERE idCadastro = ${idUsuario}`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    configurar,
+    imagem
 };

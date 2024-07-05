@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body onload="config(), imagem()">
 
     <div class="janela">
 
@@ -44,50 +44,23 @@
 
             <div class="btn-logout" onclick="limparSessao()">
                 <a href="../index.html">
-                <h3>Sair</h3></a>
+                    <h3>Sair</h3>
+                </a>
             </div>
 
         </div>
 
-        <div class="config">
-            <div class="foto">
-                <div class="profile-picture">
-                    <img src="../assets/f273dae987f963891863588833acf4561601e968192163b4ce3bc9127711ca826c949df910bf3ffd3ceb2acaf3101071900f8f0f31e9519ad0a53640758ab878.jpg" alt="Foto da Autora">
-                </div>
+        <div class="config" id="config">
+            <div class="foto" id="foto" style="height: 50%; width: 30%;">
+
                 <input type="file">
                 <!-- <button>Escolher Foto</button> -->
 
             </div>
 
 
-            <div class="info">
-                <div class="dados">
-                    <label for="label_nome" ><span style="margin-right: 5%;">Nome:</span> <input type="text" name="" id="nome_input" disabled>
-                        <button>Trocar</button></label>
+            <div class="info" id="info">
 
-                </div>
-                <div class="dados">
-                    <label for="label_username"><span style="margin-right: 1%;">Username:</span>  <input type="text" name="" id="username" disabled>
-                        <button>Trocar</button></label>
-
-                </div>
-
-                <div class="dados">
-                    <label for="label_email"><span style="margin-right: 5%;">Email:</span>  <input type="email" name="" id="email" disabled><button
-                            type="button">Trocar</button></label>
-
-                </div>
-
-                <div class="dados">
-                    <label for="label_username"><span style="margin-right: 1%;">Telefone:</span>  <input type="text" name="" id="tel" disabled>
-                        <button>Trocar</button></label>
-
-                </div>
-                <div class="dados">
-                    <label for="label_senha"><span style="margin-right: 4%;">Senha:</span>  <input type="password" name="" id="senha" disabled><button
-                            type="button">Trocar</button></label>
-
-                </div>
                 <button onsubmit="enviar()" id="enviarinfo">Salvar Informações</button>
             </div>
 
@@ -101,78 +74,96 @@
 
 </html>
 
+
+
 <script>
-
+    var b_usuario = document.getElementById("b_usuario");
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    var nomeUsuario = sessionStorage.NOME_USUARIO;
+    var idUsuario = sessionStorage.ID_USUARIO;
 
-
-    var idUsuario = sessionStorage.ID_USUARIO
-
-    const Dado = document.querySelectorAll('.dados');
-
-    Dado.forEach(group => {
-        const input = group.querySelector('input');
-        const button = group.querySelector('button');
-
-        button.addEventListener('click', () => {
-            input.disabled = !input.disabled; // Toggle disabled state
-        });
-    });
-
-
-
-    function config(idUsuario) {
-
-       
-        fetch('/usuario/configuracoes').then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status === 204) {
-                    var dadosUsuario = document.getElementById("info");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerText = "Nenhum resultado encontrado."
-                    dadosUsuario.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
+    function config() {
+        fetch(`/usuario/configuracoes/${idUsuario}`)
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    return resposta.json();
+                } else {
+                    throw new Error('Erro na resposta da API');
+                }
+            })
+            .then(function (resposta) {
+                if (resposta.length === 0) {
+                    var info = document.getElementById("config");
+                    info.innerHTML = "<span>Nenhum resultado encontrado.</span>";
+                    return;
                 }
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    var dadosUsuario = document.getElementById("info");
-                    dadosUsuario.innerHTML = "";
-                    resposta.forEach(publicacao => {
-                        console.log(publicacao.idPublicacao);  // Adicione esta linha para verificar o ID da postagem
-                        dadosUsuario.innerHTML += `
-                        <div class="publica">
-                             <div class="info-autora">
-                              <img id="foto" src="../assets/foto-autora.jpeg">
-                                <span>@JuliaAraujo</span>
-                            </div>
-                            <div class="desc-publi">
-                                <div class="conteudo">
-                                    <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
-                                    <div class="desc">${publicacao.descPublicacao}</div>
-                                    <div class="comentarios">
-                                        <button class="modalBtn" onclick="comentar(${publicacao.idPublicacao})" style="cursor:pointer">
-                                            <span class="material-symbols-outlined">comment</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                var html = resposta.map(function (usuario) {
+                    return `<div class="dados">
+                            <label for="label_nome"><span style="margin-right: 5%;">Nome:</span> <input type="text" name="" id="nome_input" value="${usuario.nome}" disabled>
+                                <button>Trocar</button>
+                            </label>
+                        </div>
+                        <div class="dados">
+                            <label for="label_username"><span style="margin-right: 1%;">Username:</span> <input type="text" name="" id="username" value="${usuario.username}" disabled>
+                                <button>Trocar</button>
+                            </label>
+                        </div>
+                        <div class="dados">
+                            <label for="label_email"><span style="margin-right: 5%;">Email:</span> <input type="email" name="" id="email" value="${usuario.email}" disabled>
+                                <button type="button">Trocar</button>
+                            </label>
+                        </div>
+                        <div class="dados">
+                            <label for="label_username"><span style="margin-right: 1%;">Telefone:</span> <input type="text" name="" id="tel" value="${usuario.telefone}" disabled>
+                                <button>Trocar</button>
+                            </label>
+                        </div>
+                        <div class="dados">
+                            <label for="label_senha"><span style="margin-right: 4%;">Senha:</span> <input type="password" name="" id="senha" value="${usuario.senha}" disabled>
+                                <button type="button">Trocar</button>
+                            </label>
                         </div>`;
+                }).join('');
 
-                    });
-
-
-                    addModalEventListeners();  // Adicione event listeners após inserir o HTML
-                });
-            } else {
-                throw 'Houve um erro na API!';
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-        });
-
+                var info = document.getElementById("info");
+                info.innerHTML = html;
+            })
+            .catch(function (erro) {
+                console.error("Erro na requisição fetch:", erro);
+            });
     }
 
 
+    fetch(`/usuario/imagem/${idUsuario}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                throw new Error('Erro na resposta da API');
+            }
+        })
+        .then(function (resposta) {
+            if (resposta.length === 0) {
+                var Foto = document.getElementById("foto");
+                Foto.innerHTML = "<span>Nenhuma imagem encontrada.</span>";
+                return;
+            }
+
+            var html = resposta.map(function (usuario) {
+                return `<div class="profile-picture">
+                        <img src="../assets/${usuario.foto}" alt="Foto do usuário">
+                    </div>`;
+            }).join('');
+
+            var fotoContainer = document.getElementById("foto");
+            fotoContainer.innerHTML = html;
+        })
+        .catch(function (erro) {
+            console.error("Erro na requisição fetch:", erro);
+        });
+
+
+    function limparSessao() {
+        sessionStorage.clear();
+    }
 </script>

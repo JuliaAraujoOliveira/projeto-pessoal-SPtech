@@ -13,8 +13,13 @@ router.post("/autenticar", function (req, res) {
 router.post('/cadastrar', upload.single('foto'), (req, res) => {
     usuarioController.cadastrar(req, res);
 });
-router.get('configuracoes', function (req,res){
-    usuarioController.configurar(req,res)
+
+router.get('/configuracoes/:idUsuario', function (req, res) {
+    usuarioController.configurar(req, res);
+});
+
+router.get('/imagem/:idUsuario', function (req, res) {
+    usuarioController.imagem(req,res);
 })
 
 // Rota para renderizar a página inicial

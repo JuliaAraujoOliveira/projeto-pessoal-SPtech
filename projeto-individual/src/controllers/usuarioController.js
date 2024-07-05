@@ -84,26 +84,31 @@ function cadastrar(req, res) {
 }
 
 function configurar(req, res) {
-
-    usuarioModel.configurar()
-
-
-    
-        .then(
-            function (resultado) {
-                res.json(resultado)
-            }).catch(
-                function (erro) {
-                    console.log(erro)
-                    console.log("\n Houve um erro ao selecionar os dados do usuario Erro:", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage)
-                }
-            );
-
+    var idUsuario = req.params.idUsuario;
+    usuarioModel.configurar(idUsuario)
+        .then(function (resultado) {
+            res.json(resultado);
+        }).catch(function (erro) {
+            console.error("Houve um erro ao selecionar os dados do usuário:", erro);
+            res.status(500).json(erro.sqlMessage || erro.message);
+        });
 }
 
+
+
+function imagem(req, res) {
+    var idUsuario = req.params.idUsuario;
+    usuarioModel.imagem(idUsuario)
+        .then(function (resultado) {
+            res.json(resultado);
+        }).catch(function (erro) {
+            console.error("Houve um erro ao selecionar a imagem do usuário:", erro);
+            res.status(500).json(erro.sqlMessage || erro.message);
+        });
+}
 module.exports = {
     autenticar,
     cadastrar, 
-    configurar
+    configurar,
+    imagem
 }
