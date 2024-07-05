@@ -88,8 +88,28 @@
             </div>
 
             <div
-                style=" height: 100%; width: 30%; display: flex; justify-content: center; background-color: blueviolet;">
-                <canvas id="ranking"></canvas>
+                style=" height: 100%; width: 30%; display: flex; justify-content: center; background-color: #F6EEDF; display: flex; flex-direction: column; align-items: center; border-radius: 10px;">
+                
+                <div class="usuarios" style="width: 100%;height: 33.33%; display: flex; align-items: center; ">
+                    <img src="../assets/29bc856fa5ba378402c8704717e2b0975880189cc0cbd6839198b1344f9617fd1539d8bda7a4487dfe86275eaa96ac37fb3ca2201dd1ea5211fa40fa4c420a88.jpg" style="height: 70%; width: 30%; margin-left: 5px; border-radius: 50%;" alt="">
+                    <div class="nome" style="height: 50%; width: 60%; display: flex; justify-content: center; font-size: 20px; flex-direction:column; align-items: center;">ju_araujo
+                        <div class="quatcomentario" style="width: 50%; height: 50%; display: flex; justify-content: center; font-size: 25px;">0</div>
+                   </div>
+                </div>
+
+                <div class="usuarios" style="width: 100%; height: 33.33%; display: flex; align-items: center; ">
+                    <img src="../assets/29bc856fa5ba378402c8704717e2b0975880189cc0cbd6839198b1344f9617fd1539d8bda7a4487dfe86275eaa96ac37fb3ca2201dd1ea5211fa40fa4c420a88.jpg" style="height: 70%; width: 30%; margin-left: 5px; border-radius: 50%;" alt="">
+                    <div class="nome" style="height: 50%; width: 60%; display: flex; justify-content: center; font-size: 20px; flex-direction:column; align-items: center;">ju_araujo
+                        <div class="quatcomentario" style="width: 50%; height: 50%;display: flex; justify-content: center; font-size: 25px;">0</div>
+                   </div>
+                </div>
+
+                <div class="usuarios" style="width: 100%; height: 33.33%; display: flex; align-items: center; ">
+                    <img src="../assets/29bc856fa5ba378402c8704717e2b0975880189cc0cbd6839198b1344f9617fd1539d8bda7a4487dfe86275eaa96ac37fb3ca2201dd1ea5211fa40fa4c420a88.jpg" style="height: 70%; width: 30%; margin-left: 5px; border-radius: 50%;" alt="">
+                    <div class="nome" style=" height: 50%; width: 60%; display: flex; justify-content: center; font-size: 20px; flex-direction:column; align-items: center;">ju_araujo
+                        <div class="quatcomentario" style="width: 50%; height: 50%; ; display: flex; justify-content: center; font-size: 25px;">0</div>
+                   </div>
+                </div>
             </div>
         </div>
 
@@ -121,18 +141,21 @@
 
 
     //contagem comentarios
-     function mporcentagem() {
-         fetch("/dashboard/mporcentagemusuario", {
-             method: "GET",
-         }).then(function (resposta) {
-             resposta.json().then((registrados) => {
-                 qtdcomentario.innerHTML = registrados[0].qtdcomentario;
-             });
-         }).catch(function (resposta) {
-             console.log(`#ERRO: ${resposta}`);
-         });
-     }
-
+    function mporcentagem() {
+    fetch("/dashboard/mporcentagemusuario", {
+        method: "GET",
+    }).then(function (resposta) {
+        resposta.json().then((dados) => {
+            if (dados.length > 0) {
+                qtdcomentario.innerHTML = dados[0].PercentualUsuariosAtivos + "%";
+            } else {
+                qtdcomentario.innerHTML = "0%";
+            }
+        });
+    }).catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+}
 
 
 

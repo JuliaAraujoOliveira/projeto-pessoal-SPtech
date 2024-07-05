@@ -38,26 +38,20 @@ function metricaspost(req,res) {
 }
 
 
-function metricasporcentagem(req,res) {
+function metricasporcentagem(req, res) {
+    console.log(`Calculando percentual de usuários ativos`);
 
-    console.log(`Usuarios`);
-
-    var idusuario = req.params.idUsuario;
-    var publicacao = req.params.publicacao;
-    console.log(req.params)
-
-    dashboardModel.metricasporcentagem(idusuario,publicacao).then(function (resultado) {
+    dashboardModel.metricasporcentagem().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("Nenhum resultado encontrado!")
+            res.status(204).send("Nenhum resultado encontrado!");
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as métricas de percentual de usuários ativos.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
-    
 }
 
 

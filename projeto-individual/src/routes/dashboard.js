@@ -11,8 +11,8 @@ router.get("/metricasusuario" ,function (req,res) {
     dashboardController.metricasusuario(req,res);
 })
 
-router.get("/mporcentagemusuario" , function (req,res) {
-    dashboardController.metricasporcentagem(req,res);
+router.get("/mporcentagemusuario", function (req, res) {
+    dashboardController.metricasporcentagem(req, res);
 })
 
 router.get("/metricaspost" ,function (req,res) {

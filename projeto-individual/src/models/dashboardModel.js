@@ -26,16 +26,19 @@ function metricaspost() {
 // cadastro curtida 
 function metricasporcentagem() {
     var instrucaoSql = `
-        SELECT 
-            ROUND((COUNT(DISTINCT tbComentario.fkCadastro) / COUNT(tbCadastro.idCadastro)) * 100, 2) AS PercentualUsuariosAtivos
-        FROM 
-            tbCadastro
-        LEFT JOIN 
-            tbComentario ON tbCadastro.idCadastro = tbComentario.fkCadastro;
+      SELECT 
+    ROUND(
+        (SELECT COUNT(DISTINCT fkCadastro) FROM tbComentario) / 
+        (SELECT COUNT(*) FROM tbCadastro) * 100,
+        2
+    ) AS PercentualUsuariosAtivos;
+
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
 
 module.exports = {
     metricasusuario,
