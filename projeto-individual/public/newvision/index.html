@@ -7,14 +7,12 @@
     <title>Home | Newvision</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="../js/sessao.js"></script>
-    <script src="indexusuario.js"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
-<body onload="atualizarFeed()">
+<body onload="atualizarFeed() ">
     <div class="janela">
 
         <div class="header-left dash-header">
@@ -64,12 +62,15 @@
                             class="material-symbols-outlined">
                             close
                         </span></button>
-                    <div class="outros_comentarios" style="background-color: #E9F4E3; height: 95%; width: 100%; display: flex;">
+                    <div class="outros_comentarios" id="outros_comentarios" style="background-color: #E9F4E3; height: 95%; width: 100%; display: flex;">
                         <div class="coment" id="coment" style=" width: auto; height: 20%; margin-top: 2%; display: flex;  align-items: center; flex-direction: row;">
-                            <div class="foto" style="height: 90%; width: 10%; border-radius: 50%;  margin-left: 1%;">
+                            <div class="foto" style="height: 90%; width: 15%; border-radius: 50%;  margin-left: 1%;">
                                 <img src="../assets/29bc856fa5ba378402c8704717e2b0975880189cc0cbd6839198b1344f9617fd1539d8bda7a4487dfe86275eaa96ac37fb3ca2201dd1ea5211fa40fa4c420a88.jpg"  style="width: 100%; height: 100%; margin-top: 5px; margin-left: 5px; border-radius: 50%;" alt="" >
+                                <span style="font-size: 13px;">@juliana_mendes</span>
                             </div>
 
+
+                            <!-- como o comentario deverá aparecer quando fizer o select -->
                             <div class="texto" style=" height: 100%; width: 90%; margin-left: 2%; "> 
                                 <span style="margin-left: 2px; width: 100%; height: 100%; display: flex; align-items: center;">
                                     "A exploração da especiaria em Duna mostra como a ganância pode devastar um ecossistema frágil. Herbert nos lembra da importância de proteger nossos recursos naturais e
@@ -122,10 +123,10 @@
                             </div>
                             <div class="desc-publi">
                                 <div class="conteudo">
-                                    <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
+                                     <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
                                     <div class="desc">${publicacao.descPublicacao}</div>
                                     <div class="comentarios">
-                                        <button class="modalBtn" onclick="comentar(${publicacao.idPublicacao})" style="cursor:pointer">
+                                        <button class="modalBtn" onclick ="postatual(${publicacao.idPublicacao}),aparecercomentarios()"  style="cursor:pointer">
                                             <span class="material-symbols-outlined">comment</span>
                                         </button>
                                     </div>
@@ -185,31 +186,38 @@
     });
 
 
+
+    var idPublicacao 
+    function postatual(idPost) {
+        idPublicacao = idPost
+
+    }
+
     // função para cadastrar comentario.
 
-    function comentar(idPostagem) {
+
+    function comentar() {
         var idUsuario = sessionStorage.ID_USUARIO;
-        sessionStorage.ID_POSTAGEM_COMENTANDO = idPostagem;
+        
 
-        console.log("idPostagem:", idPostagem);  // Adicione esta linha para verificar o ID da postagem
+        console.log("idPostagem:", idPublicacao);  // Adicione esta linha para verificar o ID da postagem
 
-        if (!idPostagem) {
+        if (!idPublicacao) {
             console.error("idPostagem is undefined!");
             return;
         }
 
         var corpo = {
             comentario: usuarioComentario.value,
-            idusuario: idUsuario,
-            postagem: idPostagem
+            idusuario: idUsuario,     
         };
 
-        fetch(`/publicacoes/comentario//${sessionStorage.getItem("ID_POSTAGEM_COMENTANDO")}`, {
+        fetch(`/publicacoes/comentario/${idPublicacao}`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(corpo)
+            body: JSON.stringify(corpo, idPublicacao)
         }).then(function (resposta) {
             console.log("resposta: ", resposta);
 
@@ -226,5 +234,48 @@
         });
 
         return false;
+    }
+
+
+    function aparecercomentarios(){
+
+        var feedcomentario = document.getElementById("outros_comentarios");
+        feedcomentario.innerHTML = "";
+
+        fetch(`/publicacoes/mostrarcomentarios/${idPublicacao}`).then(function (resposta){
+            if (resposta.ok){
+                if (resposta.status === 204){
+                   
+                    var mensagem = document.createElement("span")
+
+                    mensagem.innerText = "Nenhum resultado encontrado."
+                    feedcomentario.appendChild(mensagem);
+                    throw "Seja o primeiro a comentar!!";
+                }
+                resposta.json().then(function (resposta){
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    
+
+                    resposta.forEach(comentario =>{
+                        console.log(comentario.idPublicacao); 
+                        feedcomentario.innerHTML += `<div class="coment" id="coment" style=" width: auto; height: 20%; margin-top: 2%; display: flex;  align-items: center; flex-direction: row;">
+                            <div class="foto" style="height: 90%; width: 15%; border-radius: 50%;  margin-left: 1%;">
+                                <img  src="../assets/${comentario.Imagem} "style="width: 100%; height: 100%; margin-top: 5px; margin-left: 5px; border-radius: 50%;" alt="" >
+                                <span style="font-size: 13px;">${comentario.Nomeusuario}</span>
+                            </div>
+
+
+                            <!-- como o comentario deverá aparecer quando fizer o select -->
+                            <div class="texto" style=" height: 100%; width: 90%; margin-left: 2%; "> 
+                                <span style="margin-left: 2px; width: 100%; height: 100%; display: flex; align-items: center;">
+                                    "${comentario.Comentario}"
+                                </span>
+                            </div>    
+                        </div>`
+                    })
+                })
+            }
+        })
+
     }
 </script>

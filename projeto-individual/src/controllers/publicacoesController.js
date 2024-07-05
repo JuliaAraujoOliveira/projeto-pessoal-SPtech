@@ -90,8 +90,8 @@ function publicar(req, res) {
 
 function comentarios(req, res) {
     var comentario = req.body.comentario;
-    var idUsuario = req.body.idusuario; // Corrigido para usar req.body.idusuario
-    var idPostagem = req.params.idAviso; // Certifique-se de que o nome do parâmetro é idAviso
+    var idUsuario = req.body.idusuario;
+    var idPostagem = req.params.idPublicacao;
 
     if (comentario == undefined) {
         res.status(400).send("O comentário está indefinido!");
@@ -114,6 +114,27 @@ function comentarios(req, res) {
                 }
             );
     }
+}
+
+
+
+function mostrarcomentarios(req, res) {
+
+    var idPostagem = req.params.idPublicacao;
+    avisoModel.mostrar(idPostagem).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else if (idPostagem == undefined) {
+            res.status(400).send("ID da postagem está indefinido!");
+        }
+        else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
 
@@ -165,6 +186,7 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     comentarios,
+    mostrarcomentarios,
     editar,
     deletar
 }

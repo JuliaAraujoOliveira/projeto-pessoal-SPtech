@@ -7,10 +7,10 @@ function listar() {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `
         SELECT 
-            a.idPublicacao AS idAviso,
+            a.idPublicacao AS idPublicacao,
             a.titulo,
             a.descPublicacao
-             FROM tbPublicacao a;
+             FROM tbPublicacao a  ORDER BY idPublicacao DESC  ;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -67,15 +67,27 @@ function publicar(titulo, descricao, idUsuario) {
     return database.executar(instrucaoSql);
 }
 
-
+// comentarios dos usuarios:
 function comentarios(comentario, idPostagem, idUsuario) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, idUsuario);
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ",comentario, idPostagem, idUsuario);
     var instrucaoSql = `
         INSERT INTO tbComentario (comentario, fkPublicacao,fkCadastro) VALUES ('${comentario}', '${idPostagem}', '${idUsuario}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+// mostrando o comentario:
+function mostrar(idPostagem){
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucaoSql = `SELECT  idComentario, comentario AS Comentario,username AS Nomeusuario, foto AS Imagem 
+	FROM tbComentario JOIN tbCadastro ON tbComentario.fkCadastro = tbCadastro.idCadastro  WHERE fkPublicacao = ${idPostagem}  ORDER BY  idComentario DESC ; `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 
 function editar(novaDescricao, idAviso) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, idAviso);
@@ -101,6 +113,7 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     comentarios,
+    mostrar,
     editar,
     deletar
 }

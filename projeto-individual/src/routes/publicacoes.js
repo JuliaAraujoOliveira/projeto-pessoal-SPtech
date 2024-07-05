@@ -29,8 +29,15 @@ router.delete("/deletar/:idAviso", function (req, res) {
     publicacoesController.deletar(req, res);
 });
 
+
+// comentarios:
+
 router.post("/comentario/:idPublicacao", function (req, res) {
     publicacoesController.comentarios(req, res);
 });
+
+router.get("/mostrarcomentarios/:idPublicacao", function(req,res){
+    publicacoesController.mostrarcomentarios(req,res);
+})
 
 module.exports = router;

@@ -67,7 +67,13 @@ SELECT * FROM tbPublicacao;
     SELECT COUNT(DISTINCT fkCadastro) AS UsuariosAtivos FROM tbComentario;
 
 -- Calcular o percentual de usuários ativos
-    SELECT  (SELECT COUNT(DISTINCT fkCadastro) FROM tbComentario) / (SELECT COUNT(*) FROM tbCadastro) * 100 AS PercentualUsuariosAtivos;
+  SELECT 
+    ROUND(
+        (SELECT COUNT(DISTINCT fkCadastro) FROM tbComentario) / 
+        (SELECT COUNT(*) FROM tbCadastro) * 100,
+        2
+    ) AS PercentualUsuariosAtivos;
+
 
 
 -- montar o ranking de acordo com a qtd de comentarios que cada usuario tem
