@@ -23,7 +23,7 @@ CREATE TABLE tbCadastro(
 CREATE TABLE tbPublicacao (
 	idPublicacao INT PRIMARY KEY  AUTO_INCREMENT  
     ,titulo VARCHAR(100)
-    ,descPublicacao VARCHAR (300)
+    ,descPublicacao VARCHAR (700)
 );
 
 CREATE TABLE tbComentario(
@@ -82,16 +82,11 @@ SELECT * FROM tbPublicacao;
 	GROUP BY tbCadastro.username, tbCadastro.foto
 	ORDER BY NumeroDeComentarios DESC LIMIT 3;
 
+-- mostrar os dados no grafico
 
-
-
--- Select para mostrar o comentario jusnto com a foto e o username que o usuario criador do comentario;
-SELECT comentario AS Comentario, username AS Nomeusuario, foto as Imagem FROM tbComentario as comentario JOIN tbCadastro as usuario ON usuario.idCadastro = comentario.fkCadastro;
-
-
-
-
-
+SELECT DATE(dataH) AS Dia, COUNT(*) AS QuantidadeUsuarios FROM tbCadastro
+	WHERE dataH >= CURDATE() - INTERVAL 7 DAY
+		GROUP BY DATE(dataH) ORDER BY DATE(dataH);
 
 
 

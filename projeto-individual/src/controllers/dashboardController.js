@@ -72,10 +72,26 @@ function metricasporcentagem(req, res) {
 }
 
 
+    function obterdados(eq,res){
+        console.log(`Aparecendo dados para o grafico`)
+        dashboardModel.obtergrafico().then(function(resultado){
+            if(resultado.length > 0){
+                res.status(200).json(resultado);
+            }else{
+                res.status(204).send("Nenhum dado encontrado");
+            }
+        }).catch(function(erro){
+            console.log(erro);
+            console.log("Houve um erro ao obter os dados do grafico", erro.sqlMenssage);
+            res.statuss(500).json(erro.sqlMenssage)
+        })
+    }
+
 module.exports = {
     metricasusuario,
     metricaspost,
     metricasporcentagem,
-    rankingusuarios
+    rankingusuarios,
+    obterdados
 
 }

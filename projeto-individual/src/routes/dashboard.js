@@ -25,4 +25,8 @@ router.get("/Ranking", function (req,res) {
 })
 
 
+router.get("/obtergrafico", function (req,res){
+    dashboardController.obterdados(req,res)
+})
+
 module.exports = router;

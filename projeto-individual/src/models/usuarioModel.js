@@ -14,7 +14,7 @@ function cadastrar(usuario) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO tbCadastro (nome, username, email, telefone, senha, foto) VALUES ('${usuario.nome}','${usuario.username}', '${usuario.email}','${usuario.telefone}', '${usuario.senha}','${usuario.foto}');
+        INSERT INTO tbCadastro (nome, username, email, telefone, senha, foto, dataH) VALUES ('${usuario.nome}','${usuario.username}', '${usuario.email}','${usuario.telefone}', '${usuario.senha}','${usuario.foto}',now());
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
