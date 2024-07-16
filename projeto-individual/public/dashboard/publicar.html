@@ -21,10 +21,10 @@
 
 <body onload=" atualizarFeed()" style="background-color: #161618;">
 
-    <div class="janela" >
+    <div class="janela">
 
 
-       
+
         <div class="header-left dash-header">
 
             <img src="../assets/logo.svg" style="width:20vw;">
@@ -37,7 +37,7 @@
                 <a href="index.html">
                     <h3>Home</h3>
                 </a>
-               
+
             </div>
 
             <div class="btn-nav-white">
@@ -47,24 +47,19 @@
             </div>
 
 
-               
+
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
 
         </div>
 
-
-        <div class="dash-right" style="background-color: white;">
-            <div class="configs">
-
-            </div>
-
+        <div class="dash-right" style="background-color: white; width: 75%; display: flex; justify-content: center;">
 
             <div class="avisos">
                 <div id="alerta">
                 </div>
-                <div class="container">
+                <div class="container" style="width: 100%; ">
                     <h1>Publicar um Post</h1>
                     <div class="div-form">
                         <form id="form_postagem" method="post" onsubmit="return publicar()">
@@ -86,7 +81,7 @@
                         </form>
                     </div>
                     <h1>Posts</h1>
-                    <div class="div-results">
+                    <div class="div-results" style="display: flex;justify-content: center; margin-right: 5%; width:auto;">
                         <div id="feed_container" class="feed-container">
                         </div>
                     </div>
@@ -94,6 +89,7 @@
             </div>
         </div>
     </div>
+
 
 
 

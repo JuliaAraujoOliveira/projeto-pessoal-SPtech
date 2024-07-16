@@ -27,11 +27,11 @@ body {
   align-items: center;
 }
 
-.dash-right .avisos .container .div-form {
+.dash-right .avisos .div-form {
   width: 95%;
 }
 
-.dash-right .avisos .container .div-form #form_postagem {
+.dash-right .avisos.div-form #form_postagem {
   width: 95%;
 }
 
@@ -51,7 +51,7 @@ body {
   border-radius: 5px;
 }
 
-.dash-right .avisos .div-form button  {
+ .avisos .div-form button  {
   cursor: pointer;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border: 0;
@@ -63,6 +63,7 @@ body {
   background-color: #9EB09D;
   width: 120px;
 }
+
 
 .publicacao-btn-editar {
   cursor: pointer;
