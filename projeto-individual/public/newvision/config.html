@@ -134,6 +134,7 @@
     }
 
 
+   function imagem (){
     fetch(`/usuario/imagem/${idUsuario}`)
         .then(function (resposta) {
             if (resposta.ok) {
@@ -161,6 +162,7 @@
         .catch(function (erro) {
             console.error("Erro na requisição fetch:", erro);
         });
+   }
 
 
     function limparSessao() {
