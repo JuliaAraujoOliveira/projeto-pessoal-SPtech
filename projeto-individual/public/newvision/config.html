@@ -1,80 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurações | Newvision</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 <body onload="config(), imagem()">
-
     <div class="janela">
-
         <div class="header-left dash-header">
-
             <img src="../assets/logo.svg" style="width:20vw;">
-
             <div class="hello">
-
-                <h3>Olá, <span id="b_usuario">usuario </span>!</h3>
+                <h3>Olá, <span id="b_usuario">usuario</span>!</h3>
             </div>
             <div class="btn-nav">
                 <a href="index.html">
                     <h3>Home</h3>
                 </a>
-
             </div>
-
             <div class="btn-nav">
                 <a href="livros.html">
                     <h3>Livros Duna</h3>
                 </a>
             </div>
-
             <div class="btn-nav-white">
                 <a href="config.html">
                     <h3>Configurações</h3>
                 </a>
             </div>
-
-
-
             <div class="btn-logout" onclick="limparSessao()">
                 <a href="../index.html">
                     <h3>Sair</h3>
                 </a>
             </div>
-
         </div>
-
         <div class="config" id="config">
             <div class="foto" id="foto" style="height: 50%; width: 30%;">
-
                 <input type="file">
                 <!-- <button>Escolher Foto</button> -->
-
             </div>
-
-
             <div class="info" id="info">
-
                 <button onsubmit="enviar()" id="enviarinfo">Salvar Informações</button>
             </div>
-
         </div>
-
-
     </div>
-
-
 </body>
-
 </html>
-
-
 
 <script>
     var b_usuario = document.getElementById("b_usuario");
@@ -100,27 +71,27 @@
                 var html = resposta.map(function (usuario) {
                     return `<div class="dados">
                             <label for="label_nome"><span style="margin-right: 5%;">Nome:</span> <input type="text" name="" id="nome_input" value="${usuario.nome}" disabled>
-                                <button>Trocar</button>
+                                <button onclick="habilitarCampo('nome_input')">Trocar</button>
                             </label>
                         </div>
                         <div class="dados">
                             <label for="label_username"><span style="margin-right: 1%;">Username:</span> <input type="text" name="" id="username" value="${usuario.username}" disabled>
-                                <button>Trocar</button>
+                                <button onclick="habilitarCampo('username')">Trocar</button>
                             </label>
                         </div>
                         <div class="dados">
                             <label for="label_email"><span style="margin-right: 5%;">Email:</span> <input type="email" name="" id="email" value="${usuario.email}" disabled>
-                                <button type="button">Trocar</button>
+                                <button onclick="habilitarCampo('email')">Trocar</button>
                             </label>
                         </div>
                         <div class="dados">
-                            <label for="label_username"><span style="margin-right: 1%;">Telefone:</span> <input type="text" name="" id="tel" value="${usuario.telefone}" disabled>
-                                <button>Trocar</button>
+                            <label for="label_telefone"><span style="margin-right: 1%;">Telefone:</span> <input type="text" name="" id="tel" value="${usuario.telefone}" disabled>
+                                <button onclick="habilitarCampo('tel')">Trocar</button>
                             </label>
                         </div>
                         <div class="dados">
                             <label for="label_senha"><span style="margin-right: 4%;">Senha:</span> <input type="password" name="" id="senha" value="${usuario.senha}" disabled>
-                                <button type="button">Trocar</button>
+                                <button onclick="habilitarCampo('senha')">Trocar</button>
                             </label>
                         </div>`;
                 }).join('');
@@ -133,37 +104,39 @@
             });
     }
 
+    function imagem() {
+        fetch(`/usuario/imagem/${idUsuario}`)
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    return resposta.json();
+                } else {
+                    throw new Error('Erro na resposta da API');
+                }
+            })
+            .then(function (resposta) {
+                if (resposta.length === 0) {
+                    var Foto = document.getElementById("foto");
+                    Foto.innerHTML = "<span>Nenhuma imagem encontrada.</span>";
+                    return;
+                }
 
-   function imagem (){
-    fetch(`/usuario/imagem/${idUsuario}`)
-        .then(function (resposta) {
-            if (resposta.ok) {
-                return resposta.json();
-            } else {
-                throw new Error('Erro na resposta da API');
-            }
-        })
-        .then(function (resposta) {
-            if (resposta.length === 0) {
-                var Foto = document.getElementById("foto");
-                Foto.innerHTML = "<span>Nenhuma imagem encontrada.</span>";
-                return;
-            }
-
-            var html = resposta.map(function (usuario) {
-                return `<div class="profile-picture">
+                var html = resposta.map(function (usuario) {
+                    return `<div class="profile-picture">
                         <img src="../assets/${usuario.foto}" alt="Foto do usuário">
                     </div>`;
-            }).join('');
+                }).join('');
 
-            var fotoContainer = document.getElementById("foto");
-            fotoContainer.innerHTML = html;
-        })
-        .catch(function (erro) {
-            console.error("Erro na requisição fetch:", erro);
-        });
-   }
+                var fotoContainer = document.getElementById("foto");
+                fotoContainer.innerHTML = html;
+            })
+            .catch(function (erro) {
+                console.error("Erro na requisição fetch:", erro);
+            });
+    }
 
+    function habilitarCampo(id) {
+        document.getElementById(id).disabled = false;
+    }
 
     function limparSessao() {
         sessionStorage.clear();
