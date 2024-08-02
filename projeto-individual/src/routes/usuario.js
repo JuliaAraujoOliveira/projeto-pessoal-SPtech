@@ -27,5 +27,9 @@ router.get("", (req, res) => {
     res.render("index");
 });
 
+router.put('/atualizar/:idUsuario', function(req, res) {
+    usuarioController.atualizar(req, res);
+});
+
 
 module.exports = router;

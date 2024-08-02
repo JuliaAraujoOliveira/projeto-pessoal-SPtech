@@ -72,7 +72,7 @@ function metricasporcentagem(req, res) {
 }
 
 
-    function obterdados(eq,res){
+    function obterdados(req,res){
         console.log(`Aparecendo dados para o grafico`)
         dashboardModel.obtergrafico().then(function(resultado){
             if(resultado.length > 0){
