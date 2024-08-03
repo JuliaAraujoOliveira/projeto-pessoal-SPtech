@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>New Vision | Cadastro</title>
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" />
+  <link rel="stylesheet" href="./css/style-logincadastro.css" />
+  <link rel="icon" href="assets/ico-svg.ico" />
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="formimage">
+      <img src="assets/cadastro.svg" alt="">
+    </div>
+
+    <div class="form">
+      <div action="#">
+        <div class="formheader"  style="margin-top: 2rem;">
+          <div class="title">
+            <h1>Cadastre-se</h1>
+          </div>
+          <div class="logintbutton"  style="margin-left: 1rem;">
+            <button><a href="login.html">Entrar</a></button>
+          </div>
+
+          <div class="logintbutton" style="margin-left: 1rem;">
+            <button><a href="index.html">Voltar</a></button>
+          </div>
+        </div>
+
+
+
+        <div id="tamanho">
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="foto">Nome</label>
+              <input type="file" id="foto" name="foto" required>
+            </div>
+          </div>
+
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder=" Ex: Julia Araujo" required>
+            </div>
+          </div>
+
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" placeholder=" Ex:@julinha" required>
+            </div>
+          </div>
+          
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" name="telefone" placeholder=" Ex: (11) 94118-5028" required>
+            </div>
+          </div>
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder=" Ex:julia@outlook.com" required>
+            </div>
+          </div>
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="Senha">Senha</label>
+              <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div>
+          </div>
+
+          <div class="input-goup">
+            <div class="input-box">
+              <label for="confirmSenha" style="margin-bottom: 5px;">Confirmação de Senha</label>
+              <input type="password" id="confirmSenha" name="confirmSenha" placeholder="Confirme sua senha" required>
+            </div>
+          </div>
+
+
+          <div class="botao">
+            <button onclick="cadastrar()">Cadastrar</button>
+          </div>
+          
+         
+
+          
+        </div>
+      </div>
+    </div>
+  </div>  
+</body>
+
+</html>
+
+<script>
+
+
+  
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+
+    var fotoVar = foto.value;
+    var nomeVar = nome.value;
+    var usernameVar = username.value;
+    var emailVar = email.value;
+    var telefoneVar = telefone.value;
+    var senhaVar = senha.value;
+
+
+    
+    if (
+      fotoVar == "" ||
+      nomeVar == "" ||
+      usernameVar == "" ||
+      emailVar == "" ||
+      telefoneVar == "" ||
+      senhaVar == ""
+    ) {
+      // cardErro.style.display = "block";
+            alert("Mensagem de erro para todos os campos em branco");
+
+      //   finalizarAguardar();
+      return false;
+    } //else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
+
+    const formData = new FormData();
+    formData.append('foto', foto.files[0])
+    formData.append('nome', nome.value)
+    formData.append('username', username.value)
+    formData.append('email', email.value)
+    formData.append('telefone', telefone.value)
+    formData.append('senha', senha.value)
+
+    console.log(senha.value)
+    // Enviando o valor da nova input
+    fetch("/usuario/cadastrar", {
+      method: "POST",
+      body: formData
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          // cardErro.style.display = "block";
+
+          alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")
+          // mensagem_erro.innerHTML =
+            // "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          // finalizarAguardar();
+        } else {
+
+          alert("Houve um erro ao tentar realizar o cadastro!")
+          // throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
+  }
+
+ </script>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Newvision</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/sessao.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body onload="atualizarFeed() ">
+    <div class="janela">
+
+        <div class="header-left dash-header">
+            <img src="../assets/logo.svg" style="width:20vw;">
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuario</span>!</h3>
+            </div>
+            <div class="btn-nav-white">
+                <a href="index.html">
+                    <h3>Home</h3>
+                </a>
+            </div>
+            <div class="btn-nav">
+                <a href="livros.html">
+                    <h3>Livros Duna</h3>
+                </a>
+            </div>
+            <div class="btn-nav">
+                <a href="config.html">
+                    <h3>Configurações</h3>
+                </a>
+            </div>
+            <div class="btn-logout" onclick="limparSessao()">
+                <a href="../index.html"></a>
+                <h3>Sair</h3>
+            </div>
+        </div>
+
+        <div class="cards" id="cardAquarios"
+            style="display: flex; justify-content: center; align-items: center; margin-left: 20%;">
+            <div class="div-results" style="display: flex;">
+                <div id="feed_container" class="feed-container"
+                    style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+
+                </div>
+            </div>
+        </div>
+
+
+        <div id="open-modal" class="modal">
+            <div class="modal-content">
+
+                <div class="coments"
+                    style=" width: 100%; height: 90%; display: flex; justify-content: start; flex-direction: column;">
+                    <button class="close-btn" id="close-modal"
+                        style="display: flex; justify-content: start; margin-left: 90%; width: auto;"><span
+                            class="material-symbols-outlined">
+                            close
+                        </span></button>
+                    <div class="outros_comentarios" id="outros_comentarios" style="background-color: #E9F4E3; height: 95%; width: 100%; display: flex; flex-direction: column;overflow: auto;">
+                       
+                    </div>
+                    <div class="comentar" style="display: flex;display:flex; align-items: start; align-items: start;">
+                        <input id="usuarioComentario" placeholder="Adicione um comentario..."
+                            style="margin-top: 1.5%;"></input>
+                        <button id="save-modal" onclick="comentar()">Publicar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.getElementById('b_usuario').innerText = sessionStorage.NOME_USUARIO;
+
+    function atualizarFeed() {
+        fetch("/publicacoes/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status === 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerText = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    resposta.forEach(publicacao => {
+                        console.log(publicacao.idPublicacao);  // Adicione esta linha para verificar o ID da postagem
+                        feed.innerHTML += `
+                        <div class="publica">
+                             <div class="info-autora">
+                              <img id="foto" src="../assets/foto-autora.jpeg">
+                                <span>@JuliaAraujo</span>
+                            </div>
+                            <div class="desc-publi">
+                                <div class="conteudo">
+                                     <div class="titulo" id="titulo">${publicacao.titulo}</div><br>
+                                    <div class="desc">${publicacao.descPublicacao}</div>
+                                    <div class="comentarios">
+                                        <button class="modalBtn" onclick ="postatual(${publicacao.idPublicacao}),aparecercomentarios()"  style="cursor:pointer">
+                                            <span class="material-symbols-outlined">comment</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    });
+
+
+                    addModalEventListeners();  // Adicione event listeners após inserir o HTML
+                });
+            } else {
+                throw 'Houve um erro na API!';
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+
+    }
+
+    const switchModal = () => {
+        const modal = document.querySelector('.modal');
+        const actualStyle = modal.style.display;
+        if (actualStyle === 'block') {
+            modal.style.display = 'none';
+        } else {
+            modal.style.display = 'block';
+        }
+    };
+
+    // Adicione event listeners aos botões do modal
+    const addModalEventListeners = () => {
+        const btns = document.querySelectorAll('.modalBtn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', switchModal);
+        });
+
+        // Adicionando evento ao botão de fechar modal
+        document.getElementById('close-modal').addEventListener('click', switchModal);
+    };
+
+    // Feche o modal ao clicar fora dele
+    window.onclick = function (event) {
+        const modal = document.querySelector('.modal');
+        if (event.target === modal) {
+            switchModal();
+        }
+    };
+
+    // Chame a função para adicionar event listeners após o carregamento inicial
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.querySelector('.modal');
+        modal.style.display = 'none';
+        addModalEventListeners();
+    });
+
+
+
+    var idPublicacao 
+    function postatual(idPost) {
+        idPublicacao = idPost
+
+    }
+
+    // função para cadastrar comentario.
+
+
+    function comentar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        
+
+        console.log("idPostagem:", idPublicacao);  // Adicione esta linha para verificar o ID da postagem
+
+        if (!idPublicacao) {
+            console.error("idPostagem is undefined!");
+            return;
+        }
+
+        var corpo = {
+            comentario: usuarioComentario.value,
+            idusuario: idUsuario,     
+        };
+
+        fetch(`/publicacoes/comentario/${idPublicacao}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo, idPublicacao)
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Comentário publicado com sucesso!");
+                window.location.reload();
+            } else if (resposta.status == 404) {
+                window.alert("Erro 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+    }
+
+
+    function aparecercomentarios(){
+
+        var feedcomentario = document.getElementById("outros_comentarios");
+        feedcomentario.innerHTML = "";
+
+        fetch(`/publicacoes/mostrarcomentarios/${idPublicacao}`).then(function (resposta){
+            if (resposta.ok){
+                if (resposta.status === 204){
+                   
+                    var mensagem = document.createElement("span")
+
+                    mensagem.innerText = "Seja o primeiro a comentar!"
+                    feedcomentario.appendChild(mensagem);
+                    throw "Seja o primeiro a comentar!!";
+                }
+                resposta.json().then(function (resposta){
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    
+
+                    resposta.forEach(comentario =>{
+                        console.log(comentario.idPublicacao); 
+                        feedcomentario.innerHTML += `<div class="coment" id="coment" style=" width: 100%; height: 20%; margin-top: 2%; display: flex;  align-items: center; flex-direction: row;">
+                            <div class="foto" style="height: 75%; width: 8%; border-radius: 50%;  margin-left: 1%; display:flex; align-itens:center">
+                                <img  src="../assets/${comentario.Imagem} "style="width: 100%; height: 100%; margin-top: 5px; margin-left: 5px; border-radius: 50%;" alt="" >
+                            </div>
+
+
+                            <!-- como o comentario deverá aparecer quando fizer o select -->
+                            <div class="texto" style=" height: 100%; width: 75%; margin-left: 2%"> 
+                                 <span style="font-size: 15px;">${comentario.Nomeusuario}</span>
+                                 <span style=" width: 100%; height: 90%; display: flex; align-items: start; margin-top:2px">
+                                    "${comentario.Comentario}"
+                                </span>
+                            </div>    
+                        </div>`
+                    })
+                })
+            }
+        })
+
+    }
+</script>
